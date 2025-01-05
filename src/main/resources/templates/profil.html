@@ -12,35 +12,57 @@
 	th:href="@{/css/profil.css}"
 >
 
-    <link rel="stylesheet" th:href="@{/css/menu.css}">
+<link
+	rel="stylesheet"
+	th:href="@{/css/menu.css}"
+>
 </head>
 
 <body>
-    <div th:replace="fragments/menu :: menu"></div>
+	<div th:replace="~{fragments/menu :: menu}"></div>
 
-<div id="profil">
-	<div id="conteinerProfil">
-		<div id="elementsProfil">
-			<div class="elementProfil">
-				<div id="username" class="element1">Username :</div>
-				<div id="divUsername" class="element2">Le nom de l'utilisateur</div>
+
+	<div id="profil">
+		<div id="conteinerProfil">
+			<div id="elementsProfil">
+				<div class="elementProfil">
+					<div
+						id="username"
+						class="element1"
+					>Username :</div>
+					<div
+						id="divUsername"
+						class="element2"
+					>Le nom de l'utilisateur</div>
+				</div>
+				<div class="elementProfil">
+					<div
+						id="mail"
+						class="element1"
+					>Mail :</div>
+					<div
+						id="divMail"
+						class="element2"
+					>L'adresse mail de l'utilisateur</div>
+				</div>
+				<div class="elementProfil">
+					<div
+						id="password"
+						class="element1"
+					>Mot de passe :</div>
+					<div
+						id="divPassword"
+						class="element2"
+					>Le mot de passe de l'utilisateur</div>
+				</div>
 			</div>
-			<div class="elementProfil">
-				<div id="mail" class="element1">Mail :</div>
-				<div id="divMail" class="element2">L'adresse mail de l'utilisateur</div>
-			</div>
-			<div class="elementProfil">
-				<div id="password" class="element1">Mot de passe :</div>
-				<div id="divPassword" class="element2">Le mot de passe de l'utilisateur</div>
+			<div id="divModifier">
+				<button id="buttonModifier">Modifier</button>
 			</div>
 		</div>
-		<div id="divModifier">
-			<button id="buttonModifier">Modifier</button>
-		</div>
+
+
 	</div>
-
-
-</div>
 
 
 

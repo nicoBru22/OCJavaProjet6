@@ -7,5 +7,5 @@ import com.projet6.payMyBuddy.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
+	User findByEmail(String email);
 }

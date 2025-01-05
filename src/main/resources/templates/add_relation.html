@@ -9,28 +9,35 @@
 <title>Pay My Buddy</title>
 <link
 	rel="stylesheet"
-	th:href="@{/css/add_relation.css}">
+	th:href="@{/css/add_relation.css}"
+>
 
-    <link rel="stylesheet" th:href="@{/css/menu.css}">
+<link
+	rel="stylesheet"
+	th:href="@{/css/menu.css}"
+>
 </head>
 
 <body>
-    <div th:replace="fragments/menu :: menu"></div>
+	<div th:replace="~{fragments/menu :: menu}"></div>
 
 	<div id="addUserPage">
 		<div id="addUserContainer">
 			<form action="get">
 				<div id="elementForm">
-					<label id="searchLable">Chercher une relation</label>
-					<input id="seachInput" placeholder="Saisir une adresse mail"></input>
+					<label id="searchLable">Chercher une relation</label> <input
+						id="seachInput"
+						placeholder="Saisir une adresse mail"
+					></input>
 				</div>
 				<div id="divButtonSubmit">
-					<button id="buttonSubmit" type="submit">Ajouter</button>
+					<button
+						id="buttonSubmit"
+						type="submit"
+					>Ajouter</button>
 				</div>
 			</form>
-			
 		</div>
-		
 	</div>
 
 </body>

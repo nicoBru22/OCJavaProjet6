@@ -1,44 +1,90 @@
 <!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Pay My Buddy</title>
-	<link rel="stylesheet" th:href="@{/css/transfer.css}">
-	<link rel="stylesheet" th:href="@{/css/menu.css}">
+<meta charset="UTF-8">
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1.0"
+>
+<title>Pay My Buddy</title>
+<link
+	rel="stylesheet"
+	th:href="@{/css/transfer.css}"
+>
+<link
+	rel="stylesheet"
+	th:href="@{/css/menu.css}"
+>
 </head>
 
 <body>
-    <div th:replace="fragments/menu :: menu"></div>
-    
-    <div id="containerTransfer">
-		<form action="post" id="formTransaction">
-			<select id="selectRelation" name="choix" class="elementForm">
-			    <option value="optionDefault" class="optionSelectRelation">Selectionnez une relation</option>
-			</select>
-			<input id="inputDescription" class="elementForm" placeholder="Description">
-			<input id="inputMontant" class="elementForm" type="number" min="0" value="0">€
-			<button id="buttonSubmitTranscation" type="submit">Payer</button>
+	<div th:replace="~{fragments/menu :: menu}"></div>
+
+
+	<div id="containerTransfer">
+		<form
+			action="post"
+			id="formTransaction"
+		>
+			<select
+				id="selectRelation"
+				name="choix"
+				class="elementForm"
+			>
+				<option
+					value="optionDefault"
+					class="optionSelectRelation"
+				>Selectionnez une relation</option>
+			</select> <input
+				id="inputDescription"
+				class="elementForm"
+				placeholder="Description"
+			> <input
+				id="inputMontant"
+				class="elementForm"
+				type="number"
+				min="0"
+				value="0"
+			>€
+			<button
+				id="buttonSubmitTranscation"
+				type="submit"
+			>Payer</button>
 		</form>
-		
+
 		<div id="containerDescriptionTransfer">
-		    <div border="1" id="tableau">
-		    		        	<div id="titleTable">Mes transactions</div>
-        		<div id="headTable">
-		            <div id="divColumnTable">
-		                <div id="relationTable" class="columnTable">Relations</div>
-		                <div id="descriptionTable" class="columnTable">Description</div>
-		                <div id="montantTable" class="columnTable">Montant</div>
-		            </div>
-		        </div>
-		        <div id="containerElementTable">
-		            <div id="elementsTable">
-		                <div class="elementTable">relationTest</div>
-		                <div class="elementTable">descriptionTest</div>
-		                <div id="elementMontantTable" class="elementTable">montantTest</div>
-		            </div>
-		        </div>
-    		</div>
+			<div
+				border="1"
+				id="tableau"
+			>
+				<div id="titleTable">Mes transactions</div>
+				<div id="headTable">
+					<div id="divColumnTable">
+						<div
+							id="relationTable"
+							class="columnTable"
+						>Relations</div>
+						<div
+							id="descriptionTable"
+							class="columnTable"
+						>Description</div>
+						<div
+							id="montantTable"
+							class="columnTable"
+						>Montant</div>
+					</div>
+				</div>
+				<div id="containerElementTable">
+					<div id="elementsTable">
+						<div class="elementTable">relationTest</div>
+						<div class="elementTable">descriptionTest</div>
+						<div
+							id="elementMontantTable"
+							class="elementTable"
+						>montantTest</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
