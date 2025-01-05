@@ -1,0 +1,20 @@
+#divMenu {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 20px;
+}
+
+#divMenuElement {
+	display: flex;
+	flex-direction: row;
+}
+
+.divMenuElementLink {
+	margin-right: 20px;
+}
+
+#divNav {
+	display: flex;
+	flex-direction: row;
+}

@@ -1,0 +1,64 @@
+#buttonSubmitTranscation {
+	height: 50px;
+	width: 70px;
+	background-color: #207FEE;
+	color: white;
+	border-radius: 10px;
+	font-size: 18px;
+}
+
+.columnTable {
+	width: 300px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#containerTransfer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 80%;
+	justify-content: space-around;
+}
+
+#divColumnTable {
+	display: flex;
+	flex-direction: row;
+	padding: 10px;
+}
+
+.elementForm {
+	height: 50px;
+	margin: 15px;
+	font-size: 16px;
+}
+
+.elementTable {
+	width: 300px;
+}
+
+#elementMontantTable {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#elementsTable {
+	display: flex;
+	flex-direction: row;
+	padding: 10px;
+}
+
+#montantTable {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#tableau {
+	border: solid;
+}
+
+#titleTable {
+	font-size: 18px;
+	font-weight: bold;
+	padding: 10px;
+}

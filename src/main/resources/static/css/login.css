@@ -1,0 +1,59 @@
+#container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+#email {
+	
+}
+
+#inputDiv {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.inputForm {
+	width: 70%;
+	display: flex;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#password {
+	
+}
+
+#loginDiv {
+	border: solid;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 30%;
+	height: 60%;
+}
+
+#loginForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#titleForm {
+	color: white;
+	background-color: #F69F1D;
+	width: 55%;
+	border-radius: 9px;
+	display: flex;
+	justify-content: center;
+}
+
+#loginButtonForm {
+	margin: 20px;
+}
+
+#username {
+	
+}

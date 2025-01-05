@@ -1,0 +1,37 @@
+<!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1.0"
+>
+<title>Pay My Buddy</title>
+<link
+	rel="stylesheet"
+	th:href="@{/css/add_relation.css}">
+
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+</head>
+
+<body>
+    <div th:replace="fragments/menu :: menu"></div>
+
+	<div id="addUserPage">
+		<div id="addUserContainer">
+			<form action="get">
+				<div id="elementForm">
+					<label id="searchLable">Chercher une relation</label>
+					<input id="seachInput" placeholder="Saisir une adresse mail"></input>
+				</div>
+				<div id="divButtonSubmit">
+					<button id="buttonSubmit" type="submit">Ajouter</button>
+				</div>
+			</form>
+			
+		</div>
+		
+	</div>
+
+</body>
+</html>

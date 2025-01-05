@@ -1,0 +1,39 @@
+#buttonModifier {
+	font-size: 20px;
+	background-color: #F69F1D;
+	color: white;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+#conteinerProfil {
+	display: flex;
+	flex-direction: row;
+}
+
+#divModifier {
+	display: flex;
+	align-items: last baseline;
+}
+
+.element1 {
+	width: 180px;
+}
+
+.element2 {
+	width: 285px;
+}
+
+.elementProfil {
+	display: flex;
+	flex-direction: row;
+	margin: 20px;
+}
+
+#profil {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	height: 90vh;
+	align-items: center;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>Pay My Buddy</title>
+		<link rel="preload" as="style" th:href="@{/css/login.css}" onload="this.rel='stylesheet'">
+
+
+	</head>
+	<body>
+	    <div id="container">
+	        <div id="loginDiv">
+	            <h1 id="titleForm">Pay My Buddy</h1>
+	            <form id="loginForm" action="#" th:action="@{/login}" method="post">
+	                <div id="inputDiv">
+	                    <input name="username" id="email" class="inputForm" type="text" placeholder="email">
+	                    <input name="password" id="password" class="inputForm" type="password" placeholder="password">
+	                </div>
+	                <button id="loginButtonForm" type="submit">Se connecter</button>
+	            </form>
+	            <!-- Afficher un message d'erreur si l'authentification échoue -->
+	            <div th:if="${param.error}">
+	                <p style="color: red;">Identifiants incorrects. Veuillez réessayer.</p>
+	            </div>
+	        </div>
+	    </div>
+	</body>
+</html>
