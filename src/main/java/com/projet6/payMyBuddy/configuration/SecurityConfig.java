@@ -27,6 +27,7 @@ public class SecurityConfig {
 				.requestMatchers("/signin").permitAll()
 				.requestMatchers("/login").permitAll()
 				.requestMatchers("/profil").authenticated()
+				.requestMatchers("/connection").authenticated()
 				.requestMatchers("/add_relation").authenticated()
 				.requestMatchers("/users").permitAll()
 				.requestMatchers("/css/**", "/js/**", "/images/**")

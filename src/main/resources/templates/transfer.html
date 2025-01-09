@@ -23,19 +23,17 @@
 
 	<div id="containerTransfer">
 		<form
-			action="post"
+			action="@{/users/get_connections}"
+			method="post"
 			id="formTransaction"
-		>
-			<select
-				id="selectRelation"
-				name="choix"
-				class="elementForm"
-			>
-				<option
-					value="optionDefault"
-					class="optionSelectRelation"
-				>Selectionnez une relation</option>
-			</select> <input
+		>            <select id="selectRelation" name="choix" class="elementForm">
+                <option value="optionDefault" class="optionSelectRelation">Selectionnez une relation</option>
+                <!-- Boucle sur la liste des connexions et création des options -->
+                <option th:each="connection : ${connections}" 
+                        th:value="${connection.email}" 
+                        th:text="${connection.email}"></option>
+                        <option>test</option>
+            </select><input
 				id="inputDescription"
 				class="elementForm"
 				placeholder="Description"

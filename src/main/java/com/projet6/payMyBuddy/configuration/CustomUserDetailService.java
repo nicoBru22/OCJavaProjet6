@@ -22,13 +22,11 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        // Trouver l'utilisateur par email
         User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-
-        // Retourner les détails de l'utilisateur
+        
         return new org.springframework.security.core.userdetails.User(
             user.getEmail(),
             user.getPassword(),
@@ -36,10 +34,9 @@ public class CustomUserDetailService implements UserDetailsService {
         );
     }
 
-    // Convertir le rôle de l'utilisateur en autorité de Spring Security
     private List<GrantedAuthority> getGrantedAuthorities(String role) {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + role)); // Ajout du préfixe ROLE_
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
         return authorities;
     }
 }

@@ -2,34 +2,59 @@ package com.projet6.payMyBuddy.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projet6.payMyBuddy.model.User;
 import com.projet6.payMyBuddy.service.UserService;
 
+import org.springframework.ui.Model;
+
+
 @Controller
+@RequestMapping("/users")
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
-	@GetMapping("/users")
+
+	private static final Logger logger = LogManager.getLogger(UserController.class);
+
+	@GetMapping("/liste")
 	public List<User> getAllUser() {
 		return userService.getAllUser();
 	}
-	
-    @PostMapping("/users")
-    public String addUser(@RequestParam String username, 
-                          @RequestParam String email, 
-                          @RequestParam String password) throws Exception {
 
-        userService.addUser(username, email, password);
-        
-        return "redirect:/profil";
-    }
+	@PostMapping("/add_user")
+	public String addUser(@RequestParam String username, @RequestParam String email, @RequestParam String password)
+			throws Exception {
+		userService.addUser(username, email, password);
+		return "redirect:/profil";
+	}
+
+	@PostMapping("/add_connection")
+	public ResponseEntity<String> addConnection(@RequestParam String email) throws Exception {
+		try {
+			logger.debug("l'email dans le controller : " + email);
+			if (email == null || email.isEmpty()) {
+				logger.error("Email invalide reçu : {}", email);
+
+				throw new IllegalArgumentException("L'email est obligatoire.");
+			}
+			userService.addConnection(email);
+			return ResponseEntity.status(HttpStatus.CREATED).body("Connexion ajoutée avec succès.");
+		} catch (RuntimeException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé avec l'email : " + email);
+		}
+	}
+
 
 }
