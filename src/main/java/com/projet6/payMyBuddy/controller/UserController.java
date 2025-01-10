@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.projet6.payMyBuddy.model.User;
 import com.projet6.payMyBuddy.service.UserService;
 
-import org.springframework.ui.Model;
-
 
 @Controller
 @RequestMapping("/users")

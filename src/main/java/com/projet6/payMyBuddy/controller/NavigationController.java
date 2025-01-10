@@ -11,7 +11,7 @@ import com.projet6.payMyBuddy.model.User;
 import com.projet6.payMyBuddy.service.UserService;
 
 @Controller
-public class navigationController {
+public class NavigationController {
 	
 	@Autowired
 	public UserService userService;
@@ -51,7 +51,7 @@ public class navigationController {
 	@GetMapping("/transfer")
 	public String afficherPageTransfer(Model model) throws Exception {
         List<User> connections = userService.getConnections();
-        model.addAttribute("connections", connections); // Ajouter les connexions au modèle
+        model.addAttribute("connections", connections);
         return "transfer"; 
 	}
 

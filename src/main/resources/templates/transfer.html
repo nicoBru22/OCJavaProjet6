@@ -23,31 +23,33 @@
 
 	<div id="containerTransfer">
 		<form
-			action="@{/users/get_connections}"
+			th:action="@{/add_transaction}"
 			method="post"
 			id="formTransaction"
-		>            <select id="selectRelation" name="choix" class="elementForm">
+>            <select id="selectRelation" th:name="email" class="elementForm">
                 <option value="optionDefault" class="optionSelectRelation">Selectionnez une relation</option>
                 <!-- Boucle sur la liste des connexions et création des options -->
                 <option th:each="connection : ${connections}" 
                         th:value="${connection.email}" 
                         th:text="${connection.email}"></option>
-                        <option>test</option>
-            </select><input
+            </select>
+            <input
 				id="inputDescription"
 				class="elementForm"
 				placeholder="Description"
-			> <input
+				name="description"> 
+			<input
 				id="inputMontant"
 				class="elementForm"
+				name="amount"
 				type="number"
 				min="0"
-				value="0"
-			>€
+				step="0.01"
+				placeholder="0.00">€
 			<button
 				id="buttonSubmitTranscation"
 				type="submit"
-			>Payer</button>
+				name="buttonPay">Payer</button>
 		</form>
 
 		<div id="containerDescriptionTransfer">
