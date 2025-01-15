@@ -44,6 +44,15 @@ public class TransactionService {
 		
 		User sender = userService.getCurrentUser();
 		User receiver = userRepository.findByEmail(email);
+		
+		logger.debug("Le sender : {} ", sender);
+		logger.debug("Le receiver : {} ", receiver);
+		
+		if (receiver == null) {
+		    logger.error("Le destinataire avec l'email {} n'existe pas.", email);
+		    throw new Exception("Destinataire introuvable.");
+		}
+
 		try {
 			Transactions newTransaction = new Transactions();
 			newTransaction.setSender(sender);
@@ -56,6 +65,16 @@ public class TransactionService {
 		} catch (Exception e) {
 			logger.error("Une erreur est survenue lors de l'ajout d'une nouvelle transacation avec les paramètres : {}, {}, {}, {}, {} ", email, amount, description, receiver, sender);
 			throw new Exception("Une erreur est survenue lors de l'ajout d'une nouvelle transacation");
+		}
+	}
+	
+	public List<Transactions> getAllTransactionById() throws Exception {
+		try {
+			User user = userService.getCurrentUser();
+			List<Transactions> transactionList = transactionRepository.findBySender(user);
+			return transactionList;
+		} catch (Exception e) {
+			throw new Exception("Une erreur est survenue lors de la récupération des transactions");
 		}
 	}
 	

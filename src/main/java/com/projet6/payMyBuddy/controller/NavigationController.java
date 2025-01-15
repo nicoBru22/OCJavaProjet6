@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.projet6.payMyBuddy.model.Transactions;
 import com.projet6.payMyBuddy.model.User;
+import com.projet6.payMyBuddy.service.TransactionService;
 import com.projet6.payMyBuddy.service.UserService;
 
 @Controller
@@ -15,6 +17,9 @@ public class NavigationController {
 	
 	@Autowired
 	public UserService userService;
+	
+	@Autowired
+	private TransactionService transactionService;
 	
 	@GetMapping("/")
 	public String afficherPageAccueil(Model model) {
@@ -51,7 +56,11 @@ public class NavigationController {
 	@GetMapping("/transfer")
 	public String afficherPageTransfer(Model model) throws Exception {
         List<User> connections = userService.getConnections();
+        List<Transactions> transactions = transactionService.getAllTransactionById();
+        
         model.addAttribute("connections", connections);
+        model.addAttribute("transactions", transactions);
+        
         return "transfer"; 
 	}
 

@@ -26,30 +26,41 @@
 			th:action="@{/add_transaction}"
 			method="post"
 			id="formTransaction"
->            <select id="selectRelation" th:name="email" class="elementForm">
-                <option value="optionDefault" class="optionSelectRelation">Selectionnez une relation</option>
-                <!-- Boucle sur la liste des connexions et création des options -->
-                <option th:each="connection : ${connections}" 
-                        th:value="${connection.email}" 
-                        th:text="${connection.email}"></option>
-            </select>
-            <input
+		>
+			<select
+				id="selectRelation"
+				th:name="email"
+				class="elementForm"
+			>
+				<option
+					value="optionDefault"
+					class="optionSelectRelation"
+				>Selectionnez une relation</option>
+				<!-- Boucle sur la liste des connexions et création des options -->
+				<option
+					th:each="connection : ${connections}"
+					th:value="${connection.email}"
+					th:text="${connection.email}"
+				></option>
+			</select> <input
 				id="inputDescription"
 				class="elementForm"
 				placeholder="Description"
-				name="description"> 
-			<input
+				name="description"
+			> <input
 				id="inputMontant"
 				class="elementForm"
 				name="amount"
 				type="number"
 				min="0"
 				step="0.01"
-				placeholder="0.00">€
+				placeholder="0.00"
+			>€
 			<button
 				id="buttonSubmitTranscation"
 				type="submit"
-				name="buttonPay">Payer</button>
+				name="buttonPay"
+			>Payer</button>
 		</form>
 
 		<div id="containerDescriptionTransfer">
@@ -75,15 +86,25 @@
 					</div>
 				</div>
 				<div id="containerElementTable">
-					<div id="elementsTable">
-						<div class="elementTable">relationTest</div>
-						<div class="elementTable">descriptionTest</div>
+					<div
+						th:each="transaction : ${transactions}"
+						class="rowTable"
+					>
 						<div
-							id="elementMontantTable"
 							class="elementTable"
+							th:text="${transaction.sender.username}"
+						>relationTest</div>
+						<div
+							class="elementTable"
+							th:text="${transaction.description}"
+						>descriptionTest</div>
+						<div
+							class="elementTable"
+							th:text="${transaction.amount}"
 						>montantTest</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>

@@ -29,7 +29,8 @@ public class SecurityConfig {
 				.requestMatchers("/profil").authenticated()
 				.requestMatchers("/connection").authenticated()
 				.requestMatchers("/add_relation").authenticated()
-				.requestMatchers("/users").permitAll()
+				.requestMatchers("/users/add_user").permitAll()
+				.requestMatchers("/users/add_connection").authenticated()
 				.requestMatchers("/css/**", "/js/**", "/images/**")
 				.permitAll().anyRequest().authenticated())
 				.formLogin(login -> login

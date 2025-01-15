@@ -74,6 +74,7 @@ public class UserService {
 	}
 
 	public User addUser(String username, String email, String password) throws Exception {
+		logger.debug("Entrée dans la méthode addUser de la class UserService");
 		try {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String encodedPassword = encoder.encode(password);

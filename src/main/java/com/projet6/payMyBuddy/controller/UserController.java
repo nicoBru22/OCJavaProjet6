@@ -26,7 +26,7 @@ public class UserController {
 
 	private static final Logger logger = LogManager.getLogger(UserController.class);
 
-	@GetMapping("/liste")
+	@GetMapping("/liste_user")
 	public List<User> getAllUser() {
 		return userService.getAllUser();
 	}
@@ -34,6 +34,7 @@ public class UserController {
 	@PostMapping("/add_user")
 	public String addUser(@RequestParam String username, @RequestParam String email, @RequestParam String password)
 			throws Exception {
+		logger.debug("Entrée dans le controller /users/add_user.");
 		userService.addUser(username, email, password);
 		return "redirect:/profil";
 	}

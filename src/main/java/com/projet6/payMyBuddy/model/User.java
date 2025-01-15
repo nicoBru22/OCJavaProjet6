@@ -2,6 +2,7 @@ package com.projet6.payMyBuddy.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class User {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "connection_id")
     )
+    @ToString.Exclude
     private List<User> connections;
 }
 

@@ -1,13 +1,12 @@
 package com.projet6.payMyBuddy.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Entity
@@ -18,12 +17,12 @@ public class Transactions {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sender_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "sender_id", unique = false)
     private User sender;
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "receiver_id", referencedColumnName = "id")
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_id", unique = false)
     private User receiver;
     
     @Column
