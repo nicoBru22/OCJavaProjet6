@@ -8,7 +8,7 @@
 
 #conteinerProfil {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 }
 
 #divModifier {

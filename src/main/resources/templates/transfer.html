@@ -65,7 +65,6 @@
 
 		<div id="containerDescriptionTransfer">
 			<div
-				border="1"
 				id="tableau"
 			>
 				<div id="titleTable">Mes transactions</div>
@@ -92,7 +91,7 @@
 					>
 						<div
 							class="elementTable"
-							th:text="${transaction.sender.username}"
+							th:text="${transaction.receiver.username}"
 						>relationTest</div>
 						<div
 							class="elementTable"
@@ -101,6 +100,7 @@
 						<div
 							class="elementTable"
 							th:text="${transaction.amount}"
+							id="amountElementTable"
 						>montantTest</div>
 					</div>
 				</div>

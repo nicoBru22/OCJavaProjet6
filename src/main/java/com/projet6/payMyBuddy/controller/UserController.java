@@ -45,11 +45,12 @@ public class UserController {
 			logger.debug("l'email dans le controller : " + email);
 			if (email == null || email.isEmpty()) {
 				logger.error("Email invalide reçu : {}", email);
-
-				throw new IllegalArgumentException("L'email est obligatoire.");
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'email est obligatoire.");
 			}
 			userService.addConnection(email);
-			return ResponseEntity.status(HttpStatus.CREATED).body("Connexion ajoutée avec succès.");
+	        return ResponseEntity.status(HttpStatus.CREATED)  // 201 Created
+                    .header("Location", "/profil")  // L'URL de redirection
+                    .build();
 		} catch (RuntimeException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé avec l'email : " + email);
 		}
