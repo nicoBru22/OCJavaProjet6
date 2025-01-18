@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.projet6.payMyBuddy.model.User;
@@ -21,24 +22,30 @@ public class UserService {
 	private static final Logger logger = LogManager.getLogger(UserService.class);
 
 	public User getCurrentUser() {
-		try {
-			// Récupération des détails de l'utilisateur connecté
-			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    try {
+	        // Récupération des détails de l'utilisateur connecté
+	        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-			if (principal instanceof UserDetails) {
-				// Conversion en UserDetails si possible
-				String email = ((UserDetails) principal).getUsername();
-				// Récupération de l'utilisateur depuis le repository (en fonction de l'email)
-				return userRepository.findByEmail(email);
-			} else {
-				logger.warn("Le principal n'est pas une instance de UserDetails : {}", principal);
-				return null;
-			}
-		} catch (Exception e) {
-			logger.error("Erreur lors de la récupération de l'utilisateur actuel", e);
-			return null;
-		}
+	        // Vérification si le principal est une instance de UserDetails (utilisateur classique)
+	        if (principal instanceof UserDetails) {
+	            String email = ((UserDetails) principal).getUsername();
+	            return userRepository.findByEmail(email);
+	        }
+	        // Vérification si le principal est une instance de OAuth2User (utilisateur OAuth2)
+	        else if (principal instanceof OAuth2User) {
+	            // Dans ce cas, tu peux récupérer l'email depuis les attributs de l'OAuth2User
+	            String email = (String) ((OAuth2User) principal).getAttributes().get("email");
+	            return userRepository.findByEmail(email);
+	        } else {
+	            logger.warn("Le principal n'est pas une instance de UserDetails ou OAuth2User : {}", principal);
+	            return null;
+	        }
+	    } catch (Exception e) {
+	        logger.error("Erreur lors de la récupération de l'utilisateur actuel", e);
+	        return null;
+	    }
 	}
+
 
 	public List<User> getAllUser() {
 		return userRepository.findAll();

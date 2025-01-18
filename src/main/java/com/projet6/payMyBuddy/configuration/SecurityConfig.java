@@ -19,30 +19,40 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable()).headers(headers -> {
-			headers.addHeaderWriter((HeaderWriter) (request, response) -> response.setHeader("Content-Security-Policy",
-					"frame-ancestors 'self'"));
-		}).authorizeHttpRequests(auth -> auth
-				.requestMatchers("/h2-console/**").permitAll()
-				.requestMatchers("/signin").permitAll()
-				.requestMatchers("/login").permitAll()
-				.requestMatchers("/profil").authenticated()
-				.requestMatchers("/connection").authenticated()
-				.requestMatchers("/add_relation").authenticated()
-				.requestMatchers("/users/add_user").permitAll()
-				.requestMatchers("/users/add_connection").authenticated()
-				.requestMatchers("/css/**", "/js/**", "/images/**")
-				.permitAll().anyRequest().authenticated())
-				.formLogin(login -> login
-						.loginPage("/login")
-						.defaultSuccessUrl("/profil", true).permitAll())
-				.logout(logout -> logout
-						.logoutUrl("/logout")
-						.logoutSuccessUrl("/login?logout").permitAll())
-				.userDetailsService(customUserDetailsService);
+	    http.csrf(csrf -> csrf.disable())
+	        .headers(headers -> headers.addHeaderWriter((HeaderWriter) (request, response) -> 
+	            response.setHeader("Content-Security-Policy", "frame-ancestors 'self'")
+	        ))
+	        .authorizeHttpRequests(auth -> auth
+	            .requestMatchers("/h2-console/**").permitAll()
+	            .requestMatchers("/signin").permitAll()
+	            .requestMatchers("/login").permitAll()
+	            .requestMatchers("/profil").authenticated()
+	            .requestMatchers("/connection").authenticated()
+	            .requestMatchers("/add_relation").authenticated()
+	            .requestMatchers("/users/add_user").permitAll()
+	            .requestMatchers("/users/add_connection").authenticated()
+	            .requestMatchers("/oauth2/**").permitAll()
+	            .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+	            .anyRequest().authenticated()
+	        )
+	        .formLogin(login -> login
+	            .loginPage("/login")
+	            .defaultSuccessUrl("/profil", true).permitAll()
+	        )
+	        .oauth2Login(oauth -> oauth
+	            .loginPage("/login")
+	            .defaultSuccessUrl("/profil", true)
+	        )
+	        .logout(logout -> logout
+	            .logoutUrl("/logout")
+	            .logoutSuccessUrl("/login?logout").permitAll()
+	        )
+	        .userDetailsService(customUserDetailsService);
 
-		return http.build();
+	    return http.build();
 	}
+
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

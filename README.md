@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255) NOT NULL,       -- Nom d'utilisateur
     email VARCHAR(255) UNIQUE NOT NULL,  -- Adresse e-mail unique
     password VARCHAR(255) NOT NULL,      -- Mot de passe
-    role VARCHAR(255)                    -- Rôle facultatif
 );
 
 -- Table des transactions :
@@ -37,7 +36,6 @@ CREATE TABLE IF NOT EXISTS transactions (
 CREATE TABLE IF NOT EXISTS user_connections (
     user_id BIGINT NOT NULL,       -- Référence au premier utilisateur
     connection_id BIGINT NOT NULL, -- Référence au second utilisateur
-    PRIMARY KEY (user_id, connection_id), -- Clé primaire composite
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (connection_id) REFERENCES users(id) ON DELETE CASCADE
 );

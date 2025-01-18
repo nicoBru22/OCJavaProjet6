@@ -18,6 +18,8 @@
 	                    <input name="password" id="password" class="inputForm" type="password" placeholder="password">
 	                </div>
 	                <button id="loginButtonForm" type="submit">Se connecter</button>
+	                <a href="/oauth2/authorization/github">Se connecter avec GitHub</a>
+	                
 	            </form>
 	            <!-- Afficher un message d'erreur si l'authentification échoue -->
 	            <div th:if="${param.error}">
