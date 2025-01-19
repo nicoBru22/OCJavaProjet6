@@ -1,12 +1,16 @@
 #container {
 	display: flex;
-	justify-content: center; /* Centre horizontalement */
-	align-items: center; /* Centre verticalement */
-	height: 100vh; /* Prend toute la hauteur de la fenêtre */
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
 }
 
 #email {
 	
+}
+
+#githubConnect {
+	margin-top: 20px;
 }
 
 #inputDiv {
@@ -22,6 +26,10 @@
 	margin-bottom: 10px;
 }
 
+#logoGithub {
+	width: 150px;
+}
+
 #password {
 	
 }
@@ -33,6 +41,8 @@
 	align-items: center;
 	width: 30%;
 	height: 60%;
+	justify-content: space-between;
+	padding: 10px;
 }
 
 #signinForm {

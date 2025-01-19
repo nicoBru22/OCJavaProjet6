@@ -23,6 +23,10 @@
 	                </div>
 	                <button id="signinButtonForm" type="submit">Créer un compte</button>
 	            </form>
+	            <a id="githubConnect" href="/oauth2/authorization/github">
+                	<img id="logoGithub" alt="logo de GitHub" src="/images/github.png">
+                </a>
+                <a href="/login">Se connecter à Pay My Buddy</a>
 	            
 	            <div th:if="${param.error}">
 	                <p style="color: red;">Identifiants incorrects. Veuillez réessayer.</p>

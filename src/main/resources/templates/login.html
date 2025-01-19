@@ -17,16 +17,18 @@
 	                    <input name="username" id="email" class="inputForm" type="text" placeholder="email">
 	                    <input name="password" id="password" class="inputForm" type="password" placeholder="password">
 	                </div>
+	                <div id="divError" th:if="${param.error}">
+	                	<p style="color: red;">Identifiants incorrects. Veuillez réessayer.</p>
+	            	</div>
 	                <button id="loginButtonForm" type="submit">Se connecter</button>
-	                <a href="/signin">Créer un compte</a>
-	                <a id="githubConnect" href="/oauth2/authorization/github">
-	                	<img id="logoGithub" alt="logo de GitHub" src="/images/github.png">
-	                </a>
+	                
 	            </form>
+     	       	<a id="githubConnect" href="/oauth2/authorization/github">
+                	<img id="logoGithub" alt="logo de GitHub" src="/images/github.png">
+                </a>
+                <a href="/signin">S'inscrire sur Pay My Buddy</a>
 	            <!-- Afficher un message d'erreur si l'authentification échoue -->
-	            <div th:if="${param.error}">
-	                <p style="color: red;">Identifiants incorrects. Veuillez réessayer.</p>
-	            </div>
+
 	        </div>
 	    </div>
 	</body>
