@@ -1,9 +1,11 @@
 package com.projet6.payMyBuddy.service;
 
 import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,36 +18,84 @@ import com.projet6.payMyBuddy.repository.UserRepository;
 @Service
 public class UserService {
 
+	private static final Logger logger = LogManager.getLogger(UserService.class);
+
 	@Autowired
 	private UserRepository userRepository;
 
-	private static final Logger logger = LogManager.getLogger(UserService.class);
-
 	public User getCurrentUser() {
-	    try {
-	        // Récupération des détails de l'utilisateur connecté
-	        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try {
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-	        // Vérification si le principal est une instance de UserDetails (utilisateur classique)
-	        if (principal instanceof UserDetails) {
-	            String email = ((UserDetails) principal).getUsername();
-	            return userRepository.findByEmail(email);
-	        }
-	        // Vérification si le principal est une instance de OAuth2User (utilisateur OAuth2)
-	        else if (principal instanceof OAuth2User) {
-	            // Dans ce cas, tu peux récupérer l'email depuis les attributs de l'OAuth2User
-	            String email = (String) ((OAuth2User) principal).getAttributes().get("email");
-	            return userRepository.findByEmail(email);
-	        } else {
-	            logger.warn("Le principal n'est pas une instance de UserDetails ou OAuth2User : {}", principal);
-	            return null;
-	        }
-	    } catch (Exception e) {
-	        logger.error("Erreur lors de la récupération de l'utilisateur actuel", e);
-	        return null;
-	    }
+			if (principal instanceof UserDetails) {
+				String email = ((UserDetails) principal).getUsername();
+				return userRepository.findByEmail(email);
+			} else if (principal instanceof OAuth2User) {
+				String email = (String) ((OAuth2User) principal).getAttributes().get("email");
+				return userRepository.findByEmail(email);
+			} else {
+				logger.warn("Le principal n'est pas une instance de UserDetails ou OAuth2User : {}", principal);
+				return null;
+			}
+		} catch (Exception e) {
+			logger.error("Erreur lors de la récupération de l'utilisateur actuel", e);
+			return null;
+		}
 	}
 
+	public User infoAuthUser() throws Exception {
+		try {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Object principal = authentication.getPrincipal();
+
+			if (principal instanceof OAuth2User) { // Vérifiez que l'utilisateur est authentifié via OAuth2
+				User oAuthUser = connectWithOauth((OAuth2User) principal); // Cast explicite
+				return oAuthUser;
+
+			} else if (principal instanceof UserDetails) {
+				logger.debug("Utilisateur authentifié sur le site.");
+				User currentUser = getCurrentUser();
+
+				if (currentUser != null) {
+					logger.info("Utilisateur trouvé : {}", currentUser.getUsername());
+					return currentUser;
+				} else {
+					logger.error("Utilisateur non trouvé dans la base de données.");
+					return null;
+				}
+			}
+
+		} catch (Exception e) {
+			throw new Exception("Une erreur s'est produite.");
+		}
+		return null;
+
+	}
+
+	public User connectWithOauth(OAuth2User oAuth2User) throws Exception {
+		try {
+			String username = oAuth2User.getAttribute("login");
+			String email = oAuth2User.getAttribute("email");
+			
+			logger.debug("L'utilisateur se connecte avec pour email : {} et pour username : {} ", email, username);
+			
+			User oAuthUser = userRepository.findByEmail(email);
+	
+			if (oAuthUser == null) {
+				logger.debug("Utilisateur non trouvé, création d'un nouvel utilisateur.");
+				
+				String password = "test";
+				User newUser = addUser(username, email, password);
+	
+				return newUser;
+			}
+			logger.debug("Utilisateur trouvé : {}", oAuthUser.getUsername());
+			return oAuthUser;
+		} catch (Exception e) {
+			logger.error("Une erreur est survenue dans la récupération de l'utilisateur.");
+			throw new Exception("Une erreur est survenue dans la récupération de l'utilisateur." + e);
+		}
+	}
 
 	public List<User> getAllUser() {
 		return userRepository.findAll();

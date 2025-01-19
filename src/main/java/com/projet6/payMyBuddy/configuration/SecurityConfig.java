@@ -17,8 +17,8 @@ public class SecurityConfig {
 	@Autowired
 	private CustomUserDetailService customUserDetailsService;
 
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http.csrf(csrf -> csrf.disable())
 	        .headers(headers -> headers.addHeaderWriter((HeaderWriter) (request, response) -> 
 	            response.setHeader("Content-Security-Policy", "frame-ancestors 'self'")
@@ -54,14 +54,14 @@ public class SecurityConfig {
 	}
 
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
+    @Bean
+    PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder)
-			throws Exception {
+    @Bean
+    AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder)
+            throws Exception {
 		AuthenticationManagerBuilder authenticationManagerBuilder = http
 				.getSharedObject(AuthenticationManagerBuilder.class);
 		authenticationManagerBuilder.userDetailsService(customUserDetailsService)
