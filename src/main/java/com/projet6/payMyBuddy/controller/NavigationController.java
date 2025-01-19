@@ -57,13 +57,14 @@ public class NavigationController {
     public String afficherPageUserProfil(Model model) throws Exception {
         logger.info("Tentative d'accès au profil utilisateur.");
         
-        User userAuth = userService.infoAuthUser();
+        User userAuth = userService.getCurrentUser();
         if (userAuth == null) {
         	logger.debug("l'utilisateur n'a pas pu être identifier. L'utilisateur : {}", userAuth);
         	return "/login";
         } else {
             model.addAttribute("username", userAuth.getUsername());
             model.addAttribute("email", userAuth.getEmail());
+            model.addAttribute("password", userAuth.getPassword());
             return "/profil";
         }
     }
@@ -75,6 +76,9 @@ public class NavigationController {
             logger.debug("Récupération des connexions et transactions.");
             List<User> connections = userService.getConnections();
             List<Transactions> transactions = transactionService.getAllTransactionById();
+            
+            logger.debug("Liste des connexion : {} ", connections);
+            logger.debug("Liste des transactions : {} ", transactions);
 
             model.addAttribute("connections", connections);
             model.addAttribute("transactions", transactions);

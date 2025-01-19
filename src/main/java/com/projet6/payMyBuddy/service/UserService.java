@@ -23,38 +23,18 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public User getCurrentUser() {
-		try {
-			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-			if (principal instanceof UserDetails) {
-				String email = ((UserDetails) principal).getUsername();
-				return userRepository.findByEmail(email);
-			} else if (principal instanceof OAuth2User) {
-				String email = (String) ((OAuth2User) principal).getAttributes().get("email");
-				return userRepository.findByEmail(email);
-			} else {
-				logger.warn("Le principal n'est pas une instance de UserDetails ou OAuth2User : {}", principal);
-				return null;
-			}
-		} catch (Exception e) {
-			logger.error("Erreur lors de la récupération de l'utilisateur actuel", e);
-			return null;
-		}
-	}
-
-	public User infoAuthUser() throws Exception {
+	public User getCurrentUser() throws Exception {
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			Object principal = authentication.getPrincipal();
 
 			if (principal instanceof OAuth2User) { // Vérifiez que l'utilisateur est authentifié via OAuth2
-				User oAuthUser = connectWithOauth((OAuth2User) principal); // Cast explicite
+				User oAuthUser = getUserWithOauth((OAuth2User) principal); // Cast explicite
 				return oAuthUser;
 
 			} else if (principal instanceof UserDetails) {
 				logger.debug("Utilisateur authentifié sur le site.");
-				User currentUser = getCurrentUser();
+				User currentUser = getUserWithUserDetails();
 
 				if (currentUser != null) {
 					logger.info("Utilisateur trouvé : {}", currentUser.getUsername());
@@ -64,29 +44,44 @@ public class UserService {
 					return null;
 				}
 			}
-
 		} catch (Exception e) {
 			throw new Exception("Une erreur s'est produite.");
 		}
 		return null;
-
 	}
 
-	public User connectWithOauth(OAuth2User oAuth2User) throws Exception {
+	public User getUserWithUserDetails() {
+		try {
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			if (principal instanceof UserDetails) {
+				String email = ((UserDetails) principal).getUsername();
+				return userRepository.findByEmail(email);
+			} else {
+				logger.warn("Le principal n'est pas une instance de UserDetails : {}", principal);
+				return null;
+			}
+		} catch (Exception e) {
+			logger.error("Erreur lors de la récupération de l'utilisateur actuel", e);
+			return null;
+		}
+	}
+
+	public User getUserWithOauth(OAuth2User oAuth2User) throws Exception {
 		try {
 			String username = oAuth2User.getAttribute("login");
 			String email = oAuth2User.getAttribute("email");
-			
+
 			logger.debug("L'utilisateur se connecte avec pour email : {} et pour username : {} ", email, username);
-			
+
 			User oAuthUser = userRepository.findByEmail(email);
-	
+
 			if (oAuthUser == null) {
 				logger.debug("Utilisateur non trouvé, création d'un nouvel utilisateur.");
-				
+
 				String password = "test";
 				User newUser = addUser(username, email, password);
-	
+
 				return newUser;
 			}
 			logger.debug("Utilisateur trouvé : {}", oAuthUser.getUsername());

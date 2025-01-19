@@ -9,6 +9,10 @@
 	
 }
 
+#githubConnect {
+	margin-top: 20px;
+}
+
 #inputDiv {
 	display: flex;
 	flex-direction: column;
@@ -20,6 +24,10 @@
 	display: flex;
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+#logoGithub {
+	width: 150px;
 }
 
 #password {
