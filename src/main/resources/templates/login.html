@@ -5,9 +5,8 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <title>Pay My Buddy</title>
 		<link rel="preload" as="style" th:href="@{/css/login.css}" onload="this.rel='stylesheet'">
-
-
 	</head>
+	
 	<body>
 	    <div id="container">
 	        <div id="loginDiv">
@@ -21,15 +20,13 @@
 	                	<p style="color: red;">Identifiants incorrects. Veuillez réessayer.</p>
 	            	</div>
 	                <button id="loginButtonForm" type="submit">Se connecter</button>
-	                
 	            </form>
      	       	<a id="githubConnect" href="/oauth2/authorization/github">
                 	<img id="logoGithub" alt="logo de GitHub" src="/images/github.png">
                 </a>
                 <a href="/signin">S'inscrire sur Pay My Buddy</a>
-	            <!-- Afficher un message d'erreur si l'authentification échoue -->
-
 	        </div>
 	    </div>
 	</body>
+	
 </html>
