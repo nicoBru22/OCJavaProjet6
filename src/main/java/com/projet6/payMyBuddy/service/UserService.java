@@ -31,7 +31,7 @@ public class UserService {
 			if (principal instanceof OAuth2User) { // Vérifiez que l'utilisateur est authentifié via OAuth2
 				User oAuthUser = getUserWithOauth((OAuth2User) principal); // Cast explicite
 				return oAuthUser;
-
+ 
 			} else if (principal instanceof UserDetails) {
 				logger.debug("Utilisateur authentifié sur le site.");
 				User currentUser = getUserWithUserDetails();

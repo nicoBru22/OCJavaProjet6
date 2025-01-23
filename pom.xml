@@ -15,18 +15,6 @@
 	<name>payMyBuddy</name>
 	<description>Projet 6 de la formation développeur java d&apos;Open Classroom</description>
 	<url />
-	<licenses>
-		<license />
-	</licenses>
-	<developers>
-		<developer />
-	</developers>
-	<scm>
-		<connection />
-		<developerConnection />
-		<tag />
-		<url />
-	</scm>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -72,36 +60,32 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- Ajout de Log4j2 -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-		</dependency>
-
-		<!-- Spring Boot Starter Log4j2 pour la gestion des logs -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-		<!--Ajout de OAuth2 pour l'authentification via autre appli-->
+		<!-- Ajout de OAuth2 pour l'authentification via autre appli -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
 
-		<!--Ajout de dotenv pour sécuriser les données-->
+		<!-- Ajout de dotenv pour sécuriser les données -->
 		<dependency>
 			<groupId>io.github.cdimascio</groupId>
 			<artifactId>dotenv-java</artifactId>
 			<version>3.1.0</version>
 		</dependency>
 
+		<!-- Dépendances pour Mockito -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Dépendances pour les tests avec Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -133,5 +117,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

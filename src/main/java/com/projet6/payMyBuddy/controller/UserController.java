@@ -26,9 +26,15 @@ public class UserController {
 
 	private static final Logger logger = LogManager.getLogger(UserController.class);
 
-	@GetMapping("/liste_user")
-	public List<User> getAllUser() {
-		return userService.getAllUser();
+	@GetMapping("/list_user")
+	public ResponseEntity<?> getAllUser() {
+		List<User> userList = userService.getAllUser();
+		
+		if (userList.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.ok(userList);
+		}
 	}
 
 	@PostMapping("/add_user")
@@ -36,6 +42,7 @@ public class UserController {
 			throws Exception {
 		logger.debug("Entrée dans le controller /users/add_user.");
 		userService.addUser(username, email, password);
+		ResponseEntity.status(HttpStatus.OK);
 		return "redirect:/profil";
 	}
 

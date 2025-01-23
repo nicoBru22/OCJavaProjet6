@@ -56,8 +56,8 @@ public class NavigationController {
     @GetMapping("/profil")
     public String afficherPageUserProfil(Model model) throws Exception {
         logger.info("Tentative d'accès au profil utilisateur.");
-        
         User userAuth = userService.getCurrentUser();
+        System.out.println("le userAuth : " + userAuth);
         if (userAuth == null) {
         	logger.debug("l'utilisateur n'a pas pu être identifier. L'utilisateur : {}", userAuth);
         	return "/login";
