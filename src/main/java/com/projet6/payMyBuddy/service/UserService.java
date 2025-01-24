@@ -24,9 +24,12 @@ public class UserService {
 	private UserRepository userRepository;
 
 	public User getCurrentUser() throws Exception {
+		logger.info("Entrée dans la méthode UserService.getcurrentUser().");
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			logger.debug("L'authentification : {} ", authentication);
 			Object principal = authentication.getPrincipal();
+			logger.debug("L'object principal : {} ", principal);
 
 			if (principal instanceof OAuth2User) { // Vérifiez que l'utilisateur est authentifié via OAuth2
 				User oAuthUser = getUserWithOauth((OAuth2User) principal); // Cast explicite
@@ -35,6 +38,7 @@ public class UserService {
 			} else if (principal instanceof UserDetails) {
 				logger.debug("Utilisateur authentifié sur le site.");
 				User currentUser = getUserWithUserDetails();
+				logger.debug("Le currentUser : {} ", currentUser);
 
 				if (currentUser != null) {
 					logger.info("Utilisateur trouvé : {}", currentUser.getUsername());
@@ -51,11 +55,13 @@ public class UserService {
 	}
 
 	public User getUserWithUserDetails() {
+		logger.info("Entrée dans la méthode userService.getUserWithUserDetails.");
 		try {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 			if (principal instanceof UserDetails) {
 				String email = ((UserDetails) principal).getUsername();
+				logger.debug("L'email : {} ", email);
 				return userRepository.findByEmail(email);
 			} else {
 				logger.warn("Le principal n'est pas une instance de UserDetails : {}", principal);
