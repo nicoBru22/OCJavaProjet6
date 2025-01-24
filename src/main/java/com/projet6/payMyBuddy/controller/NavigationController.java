@@ -60,7 +60,7 @@ public class NavigationController {
         System.out.println("le userAuth : " + userAuth);
         if (userAuth == null) {
         	logger.debug("l'utilisateur n'a pas pu être identifier. L'utilisateur : {}", userAuth);
-        	return "/login";
+        	return "redirect:/login";
         } else {
             model.addAttribute("username", userAuth.getUsername());
             model.addAttribute("email", userAuth.getEmail());

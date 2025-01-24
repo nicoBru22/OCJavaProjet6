@@ -32,7 +32,7 @@ public class SecurityConfig {
 	            .requestMatchers("/add_relation").authenticated()
 	            .requestMatchers("/users/add_user").permitAll()
 	            .requestMatchers("/users/add_connection").authenticated()
-	            .requestMatchers("/oauth2/**").permitAll()
+	            .requestMatchers("/users/list_user").hasAnyRole("ADMIN")
 	            .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
 	            .anyRequest().authenticated()
 	        )

@@ -38,13 +38,16 @@ public class UserController {
 	}
 
 	@PostMapping("/add_user")
-	public String addUser(@RequestParam String username, @RequestParam String email, @RequestParam String password)
-			throws Exception {
-		logger.debug("Entrée dans le controller /users/add_user.");
-		userService.addUser(username, email, password);
-		ResponseEntity.status(HttpStatus.OK);
-		return "redirect:/profil";
+	public ResponseEntity<Void> addUser(@RequestParam String username, @RequestParam String email, @RequestParam String password)
+	        throws Exception {
+	    logger.info("Entrée dans le controller /users/add_user.");
+	    logger.debug("Les données en paramètre sont : username : {}, email : {}, password : {}", username, email, password);
+	    userService.addUser(username, email, password);
+	    return ResponseEntity.status(HttpStatus.CREATED)
+                .header("Location", "/profil")
+                .build();
 	}
+
 
 	@PostMapping("/add_connection")
 	public ResponseEntity<String> addConnection(@RequestParam String email) throws Exception {
