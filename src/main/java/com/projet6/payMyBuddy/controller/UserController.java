@@ -27,7 +27,7 @@ public class UserController {
 	private static final Logger logger = LogManager.getLogger(UserController.class);
 
 	@GetMapping("/list_user")
-	public ResponseEntity<?> getAllUser() {
+	public ResponseEntity<?> getAllUser() throws Exception {
 		List<User> userList = userService.getAllUser();
 		
 		if (userList.isEmpty()) {

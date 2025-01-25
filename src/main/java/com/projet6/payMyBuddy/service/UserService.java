@@ -74,6 +74,7 @@ public class UserService {
 	}
 
 	public User getUserWithOauth(OAuth2User oAuth2User) throws Exception {
+		logger.info("Entrée dans la méthode UserService.getUserWithOAuth().");
 		try {
 			String username = oAuth2User.getAttribute("login");
 			String email = oAuth2User.getAttribute("email");
@@ -98,8 +99,17 @@ public class UserService {
 		}
 	}
 
-	public List<User> getAllUser() {
-		return userRepository.findAll();
+	public List<User> getAllUser() throws Exception {
+		logger.info("Entreé dans la méthode userService.getAllUser().");
+		try {
+			List<User> userList = userRepository.findAll();
+			logger.debug("La liste des utilisateurs : {} ", userList);
+			return userList;
+		} catch (Exception e) {
+			logger.error("une erreur est survenue lors de la récupération de la liste des utilisateurs.");
+			throw new Exception("une erreur est survenue lors de la récupération de la liste des utilisateurs." + e);
+		}
+
 	}
 
 	public void addConnection(String email) throws Exception {
@@ -143,7 +153,7 @@ public class UserService {
 			newUser.setPassword(encodedPassword);
 			newUser.setRole("user");
 
-			System.out.println("le nouvel utilisateur : {}" + newUser);
+			logger.debug("le nouvel utilisateur : {}" + newUser);
 
 			return userRepository.save(newUser);
 		} catch (Exception e) {
@@ -153,6 +163,7 @@ public class UserService {
 	}
 
 	public List<User> getConnections() throws Exception {
+		logger.info("Entrée dans la méthode UserService.getConnections().");
 		User currentUser = null;
 		try {
 			currentUser = getCurrentUser();
