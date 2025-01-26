@@ -69,11 +69,15 @@ public class TransactionService {
 	}
 	
 	public List<Transactions> getAllTransactionById() throws Exception {
+		logger.info("Entrée dans la méthode TransationService.getAllTransactionById.");
 		try {
 			User user = userService.getCurrentUser();
+			logger.debug("Le currentUser est : {} ", user);
 			List<Transactions> transactionList = transactionRepository.findBySender(user);
+			logger.debug("la liste es transactions : {} ", transactionList);
 			return transactionList;
 		} catch (Exception e) {
+			logger.error("\"Une erreur est survenue lors de la récupération des transactions.");
 			throw new Exception("Une erreur est survenue lors de la récupération des transactions");
 		}
 	}
