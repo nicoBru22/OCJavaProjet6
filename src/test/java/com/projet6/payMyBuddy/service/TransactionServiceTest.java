@@ -1,8 +1,10 @@
 package com.projet6.payMyBuddy.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -72,44 +74,46 @@ public class TransactionServiceTest {
 	}
 	
 	@Test
-	void testAddTransaction_withReveiverNull() throws Exception {
-		//préparation du test
-		String emailTest = "email@test.fr";
-		String descriptionTest = "descriptionTest";
-		double amountTest = 24.09;
-		
-		String senderUsernameTest = "nicolas";
-		String emailSenderTest = "emailSenderTest@test.fr";
-		String passwordTest = "passwordTest";
-		String roleTest = "USER";
-        List<User> connectionsTest = new ArrayList<>();
-		
-        User userTest = new User();
-        userTest.setId(1L);
-        userTest.setUsername(senderUsernameTest);
-        userTest.setEmail(emailSenderTest);
-        userTest.setRole(roleTest);
-        userTest.setPassword(passwordTest);
-        userTest.setConnections(connectionsTest);
-		
-		User receiver = null;
-		
-		//mocks
-		when(userService.getCurrentUser()).thenReturn(userTest);
-		when(userRepository.findByEmail(emailTest)).thenReturn(receiver);
-		
-		//méthode à tester 
+	void testAddTransaction_withReceiverNull() throws Exception {
+	    // Préparation des données
+	    String emailTest = "email@test.fr";
+	    String descriptionTest = "descriptionTest";
+	    double amountTest = 24.09;
+
+	    User sender = new User();
+	    sender.setId(1L);
+	    sender.setUsername("nicolas");
+	    sender.setEmail("emailSenderTest@test.fr");
+	    sender.setRole("USER");
+	    sender.setPassword("passwordTest");
+	    sender.setConnections(new ArrayList<>());
+
+	    User receiver = null; // Simuler un destinataire introuvable
+
+	    // Mocks
+	    when(userService.getCurrentUser()).thenReturn(sender);
+	    when(userRepository.findByEmail(emailTest)).thenReturn(receiver);
+
+	    // Méthode à tester
 	    Exception exception = assertThrows(Exception.class, () -> {
 	        transactionService.addTransaction(emailTest, descriptionTest, amountTest);
 	    });
 
-	    // Assertions
-	    assertEquals("Destinataire introuvable.", exception.getMessage());
-		//verifications
-		verify(userService, times(1)).getCurrentUser();
-		verify(userRepository, times(1)).findByEmail(emailTest);
-		
+	    // Assertions : vérifier le message de l'exception relancée
+	    assertEquals("Une erreur est survenue lors de l'ajout d'une nouvelle transacation", exception.getMessage());
+
+	    // Vérification que l'exception a bien une cause (celle de "Destinataire introuvable.")
+	    Throwable cause = exception.getCause();
+	    assertThat(cause).isNotNull();
+	    assertEquals("Destinataire introuvable.", cause.getMessage());
+
+	    // Vérifications des interactions
+	    verify(userService, times(1)).getCurrentUser();
+	    verify(userRepository, times(1)).findByEmail(emailTest);
+	    verifyNoInteractions(transactionRepository); // Aucune tentative de sauvegarde ne doit être faite
 	}
+
+
 	
 	@Test
 	void testAddTransaction() throws Exception {
@@ -218,5 +222,55 @@ public class TransactionServiceTest {
 		verify(userService, times(1)).getCurrentUser();
 		verify(transactionRepository, times (1)).findBySender(userTest);
 	}
+	
+	@Test
+	void testGetAllTransactionById_Exception() throws Exception {
+	    // Mock
+	    when(userService.getCurrentUser()).thenThrow(new RuntimeException("Erreur dans getCurrentUser"));
+
+	    // Vérifications
+	    Exception exception = assertThrows(Exception.class, () -> {
+	        transactionService.getAllTransactionById();
+	    });
+	    
+	    assertEquals("Une erreur est survenue lors de la récupération des transactions", exception.getMessage());
+	    verify(userService, times(1)).getCurrentUser();
+	    verifyNoInteractions(transactionRepository);
+	}
+	
+	@Test
+	void testAddTransaction_Exception() throws Exception {
+	    // Mock
+	    when(userService.getCurrentUser()).thenThrow(new Exception("Erreur dans le getCurrentUser"));
+	    
+	    // Exécution et vérification
+	    Exception exception = assertThrows(Exception.class, () -> {
+	        transactionService.addTransaction("test@example.com", "Test Description", 100.0);
+	    });
+
+	    // Vérifications
+	    assertThat(exception.getMessage()).isEqualTo("Une erreur est survenue lors de l'ajout d'une nouvelle transacation");
+
+	    verify(userService, times(1)).getCurrentUser();
+	    verifyNoInteractions(userRepository);
+	    verifyNoInteractions(transactionRepository);
+	}
+	
+	@Test
+	void testGetAllTransactions_Exception() {
+	    // Simuler une exception non vérifiée
+	    when(transactionRepository.findAll()).thenThrow(new RuntimeException("Erreur dans le findAll"));
+	    
+	    // Vérification
+	    Exception exception = assertThrows(Exception.class, () -> {
+	        transactionService.getAllTransactions();
+	    });
+	    
+	    verify(transactionRepository, times(1)).findAll();
+	    assertThat(exception.getMessage()).isEqualTo("Une erreur est survenue lors de la récupération de toutes les transacations.");
+	}
+
+
+
 
 }
