@@ -16,20 +16,63 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.projet6.payMyBuddy.model.User;
 import com.projet6.payMyBuddy.service.UserService;
 
-
+/**
+ * Contrôleur pour gérer les utilisateurs dans l'application PayMyBuddy.
+ * 
+ * <p>
+ * Ce contrôleur permet de gérer les utilisateurs, en incluant la récupération
+ * de la liste des utilisateurs, l'ajout d'un utilisateur et l'ajout d'une
+ * connexion pour un utilisateur.
+ * </p>
+ * 
+ * <strong>Routes gérées :</strong>
+ * <ul>
+ * <li>{@code /users/list_user} : Récupérer la liste des utilisateurs.</li>
+ * <li>{@code /users/add_user} : Ajouter un utilisateur.</li>
+ * <li>{@code /users/add_connection} : Ajouter une connexion à un utilisateur en
+ * fonction de l'email.</li>
+ * </ul>
+ * 
+ * <strong>Services utilisés :</strong>
+ * <ul>
+ * <li>{@link UserService} : Service pour gérer les utilisateurs.</li>
+ * </ul>
+ * 
+ * <strong>Gestion des erreurs :</strong>
+ * <p>
+ * Les erreurs sont gérées au niveau des méthodes pour fournir des réponses
+ * appropriées, notamment pour les cas où les données sont invalides ou les
+ * utilisateurs non trouvés.
+ * </p>
+ * 
+ * <strong>Journalisation :</strong>
+ * <p>
+ * Cette classe utilise Log4j2 pour enregistrer les événements importants dans
+ * le processus d'ajout d'un utilisateur ou d'une connexion, ainsi que pour la
+ * gestion des erreurs.
+ * </p>
+ */
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
+	private static final Logger logger = LogManager.getLogger(UserController.class);
+
 	@Autowired
 	private UserService userService;
 
-	private static final Logger logger = LogManager.getLogger(UserController.class);
-
+	/**
+	 * Récupère la liste de tous les utilisateurs.
+	 * 
+	 * @return La réponse contenant la liste des utilisateurs ou un statut HTTP 204
+	 *         (No Content) si la liste est vide.
+	 * @throws Exception Si une erreur se produit lors de la récupération des
+	 *                   utilisateurs.
+	 */
 	@GetMapping("/list_user")
 	public ResponseEntity<?> getAllUser() throws Exception {
 		List<User> userList = userService.getAllUser();
-		
+
 		if (userList.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		} else {
@@ -37,34 +80,50 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Ajoute un nouvel utilisateur.
+	 * 
+	 * @param username Le nom d'utilisateur de l'utilisateur à ajouter.
+	 * @param email    L'email de l'utilisateur à ajouter.
+	 * @param password Le mot de passe de l'utilisateur à ajouter.
+	 * @return Une réponse HTTP avec un statut 201 (Created) si l'utilisateur est
+	 *         ajouté avec succès.
+	 * @throws Exception Si une erreur se produit lors de l'ajout de l'utilisateur.
+	 */
 	@PostMapping("/add_user")
-	public ResponseEntity<Void> addUser(@RequestParam String username, @RequestParam String email, @RequestParam String password)
-	        throws Exception {
-	    logger.info("Entrée dans le controller /users/add_user.");
-	    logger.debug("Les données en paramètre sont : username : {}, email : {}, password : {}", username, email, password);
-	    userService.addUser(username, email, password);
-	    return ResponseEntity.status(HttpStatus.CREATED)
-                .header("Location", "/profil")
-                .build();
+	public ResponseEntity<Void> addUser(@RequestParam String username, @RequestParam String email,
+			@RequestParam String password) throws Exception {
+		logger.info("Entrée dans le controller /users/add_user.");
+		logger.debug("Les données en paramètre sont : username : {}, email : {}, password : {}", username, email,
+				password);
+		userService.addUser(username, email, password);
+		return ResponseEntity.status(HttpStatus.CREATED).header("Location", "/profil").build();
 	}
 
-
+	/**
+	 * Ajoute une connexion à un utilisateur en fonction de l'email fourni.
+	 * 
+	 * @param email L'email de l'utilisateur avec lequel établir la connexion.
+	 * @return Une réponse HTTP avec un statut 201 (Created) si la connexion est
+	 *         ajoutée avec succès, ou un statut 400 (Bad Request) si l'email est
+	 *         invalide, ou un statut 404 (Not Found) si l'utilisateur n'est pas
+	 *         trouvé.
+	 * @throws Exception Si une erreur se produit lors de l'ajout de la connexion.
+	 */
 	@PostMapping("/add_connection")
 	public ResponseEntity<String> addConnection(@RequestParam String email) throws Exception {
 		try {
-			logger.debug("l'email dans le controller : " + email);
+			logger.debug("L'email dans le controller : " + email);
 			if (email == null || email.isEmpty()) {
 				logger.error("Email invalide reçu : {}", email);
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'email est obligatoire.");
 			}
 			userService.addConnection(email);
-	        return ResponseEntity.status(HttpStatus.CREATED)  // 201 Created
-                    .header("Location", "/profil")  // L'URL de redirection
-                    .build();
+			return ResponseEntity.status(HttpStatus.CREATED) // 201 Created
+					.header("Location", "/profil") // L'URL de redirection
+					.build();
 		} catch (RuntimeException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé avec l'email : " + email);
 		}
 	}
-
-
 }
