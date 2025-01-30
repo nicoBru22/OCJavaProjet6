@@ -177,6 +177,7 @@ public class NavigationController {
 			model.addAttribute("username", userAuth.getUsername());
 			model.addAttribute("email", userAuth.getEmail());
 			model.addAttribute("password", userAuth.getPassword());
+			model.addAttribute("solde", userAuth.getSolde());
 			return "/profil";
 		}
 	}
@@ -200,7 +201,8 @@ public class NavigationController {
 	public String afficherPageTransfer(Model model) {
 		logger.info("Tentative d'accès à la page des transactions.");
 		try {
-			logger.debug("Récupération des connexions et transactions.");
+			logger.debug("Récupération de l'utilisateur des connexions et transactions.");	
+			User userAuth = userService.getCurrentUser();
 			List<User> connections = userService.getConnections();
 			List<Transactions> transactions = transactionService.getAllTransactionById();
 
@@ -209,6 +211,7 @@ public class NavigationController {
 
 			model.addAttribute("connections", connections);
 			model.addAttribute("transactions", transactions);
+			model.addAttribute("solde", userAuth.getSolde());
 
 			logger.info("Données de transfert récupérées avec succès.");
 			return "transfer";

@@ -254,6 +254,7 @@ public class UserService {
 			newUser.setUsername(username);
 			newUser.setEmail(email);
 			newUser.setPassword(encodedPassword);
+			newUser.setSolde(0);
 			newUser.setRole("user");
 
 			logger.debug("le nouvel utilisateur : {}" + newUser);

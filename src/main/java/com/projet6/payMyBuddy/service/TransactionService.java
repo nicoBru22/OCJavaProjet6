@@ -1,6 +1,9 @@
 package com.projet6.payMyBuddy.service;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,7 +60,7 @@ public class TransactionService {
      * @return la transaction créée et sauvegardée.
      * @throws Exception si une erreur survient lors de l'ajout de la transaction ou si le destinataire est introuvable.
      */
-    public Transactions addTransaction(String email, String description, Double amount) throws Exception {
+    public Transactions addTransaction(String email, String description, double amount) throws Exception {
         logger.info("Entrée dans la méthode addTransaction de la classe TransactionService.");
         logger.debug("Les données en paramètre : email : {}, description : {}, amount : {}", email, description, amount);
         try {
@@ -71,11 +74,14 @@ public class TransactionService {
                 logger.error("Le destinataire avec l'email {} n'existe pas.", email);
                 throw new Exception("Destinataire introuvable.");
             } else {
+            	double bankCommission = getBankCommission(amount);
+            	
                 Transactions newTransaction = new Transactions();
                 newTransaction.setSender(sender);
                 newTransaction.setReceiver(receiver);
                 newTransaction.setDescription(description);
                 newTransaction.setAmount(amount);
+                newTransaction.setBankCommission(bankCommission);
 
                 logger.debug("La nouvelle transaction à sauvegarder : {}", newTransaction);
                 return transactionRepository.save(newTransaction);
@@ -84,6 +90,21 @@ public class TransactionService {
             logger.error("Une erreur est survenue lors de l'ajout d'une nouvelle transaction.", e);
             throw new Exception("Une erreur est survenue lors de l'ajout d'une nouvelle transaction.", e);
         }
+    }
+    
+    public double getBankCommission(double amount) {
+    	logger.info("Entrée dans la méthode TransactionService.getBankCommission");
+    	try {
+    		logger.debug("Tentative de calculer la commission bancaire pour le montant : {} ", amount);
+    		double bankCommission = 0.0005;
+    		double resultBankCommission = amount * bankCommission;
+            
+    		logger.debug("Le montant de la commission est de : {}, pour une transaction de : {} ", resultBankCommission, amount);	
+        	return resultBankCommission;
+    	} catch (Exception e) {
+    		logger.error("Une erreur est survenue lors de la réupération de la commission bancaire avec le montant : {} ", amount);
+    		throw new RuntimeException("Une erreur est survenue lors de la réupération de la commission bancaire." + e);
+    	}    	
     }
 
     /**

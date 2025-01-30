@@ -60,4 +60,8 @@ public class Transactions {
 
 	@Column
 	private double amount;
+	
+	@Column(nullable = false)
+	private Double bankCommission = 0.0;
+
 }

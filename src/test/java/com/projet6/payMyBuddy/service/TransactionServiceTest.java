@@ -100,7 +100,7 @@ public class TransactionServiceTest {
 	    });
 
 	    // Assertions : vérifier le message de l'exception relancée
-	    assertEquals("Une erreur est survenue lors de l'ajout d'une nouvelle transacation", exception.getMessage());
+	    assertEquals("Une erreur est survenue lors de l'ajout d'une nouvelle transaction.", exception.getMessage());
 
 	    // Vérification que l'exception a bien une cause (celle de "Destinataire introuvable.")
 	    Throwable cause = exception.getCause();
@@ -233,7 +233,7 @@ public class TransactionServiceTest {
 	        transactionService.getAllTransactionById();
 	    });
 	    
-	    assertEquals("Une erreur est survenue lors de la récupération des transactions", exception.getMessage());
+	    assertEquals("Une erreur est survenue lors de la récupération des transactions.", exception.getMessage());
 	    verify(userService, times(1)).getCurrentUser();
 	    verifyNoInteractions(transactionRepository);
 	}
@@ -249,7 +249,7 @@ public class TransactionServiceTest {
 	    });
 
 	    // Vérifications
-	    assertThat(exception.getMessage()).isEqualTo("Une erreur est survenue lors de l'ajout d'une nouvelle transacation");
+	    assertThat(exception.getMessage()).isEqualTo("Une erreur est survenue lors de l'ajout d'une nouvelle transaction.");
 
 	    verify(userService, times(1)).getCurrentUser();
 	    verifyNoInteractions(userRepository);
@@ -267,7 +267,7 @@ public class TransactionServiceTest {
 	    });
 	    
 	    verify(transactionRepository, times(1)).findAll();
-	    assertThat(exception.getMessage()).isEqualTo("Une erreur est survenue lors de la récupération de toutes les transacations.");
+	    assertThat(exception.getMessage()).isEqualTo("Une erreur est survenue lors de la récupération de toutes les transactions.");
 	}
 
 
