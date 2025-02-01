@@ -135,6 +135,7 @@ public class TransactionServiceTest {
         senderTest.setRole(roleTest);
         senderTest.setPassword(passwordTest);
         senderTest.setConnections(connectionsTest);
+        senderTest.setSolde(100);
         
         User receiverTest = new User();
         receiverTest.setId(2L);
@@ -143,9 +144,10 @@ public class TransactionServiceTest {
         receiverTest.setRole(roleTest);
         receiverTest.setPassword(passwordTest);
         receiverTest.setConnections(connectionsTest);
+        receiverTest.setSolde(100);
         
         String descriptionTest = "descirptionTest";
-        double amountTest = 16.23;
+        double amountTest = 100.00;
         
         Transactions mockedTransaction = new Transactions();
         mockedTransaction.setAmount(amountTest);
@@ -153,6 +155,8 @@ public class TransactionServiceTest {
         mockedTransaction.setReceiver(receiverTest);
         mockedTransaction.setSender(senderTest);
         mockedTransaction.setId(0);
+        mockedTransaction.setBankCommission(0.05);
+        mockedTransaction.setTotalAmount(100.05);
         
         //mocks
 		when(userService.getCurrentUser()).thenReturn(senderTest);

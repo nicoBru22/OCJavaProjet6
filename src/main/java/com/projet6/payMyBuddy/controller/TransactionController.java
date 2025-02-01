@@ -61,19 +61,36 @@ public class TransactionController {
 	 * @throws Exception Si une erreur se produit lors de l'ajout de la transaction.
 	 */
 	@PostMapping("/add_transaction")
-	public String addTransaction(@RequestParam String email,
-	                             @RequestParam String description,
-	                             @RequestParam double amount,
-	                             RedirectAttributes redirectAttributes) {
+	public ResponseEntity<String> addTransaction(@RequestParam String email,
+	                                             @RequestParam String description,
+	                                             @RequestParam double amount,
+	                                             RedirectAttributes redirectAttributes) {
 	    try {
 	        transactionService.addTransaction(email, description, amount);
-	        return "redirect:/transfer"; // Redirection en cas de succès
+
+	        // Redirection vers /transfer avec statut 302 (Found)
+	        return ResponseEntity.status(HttpStatus.CREATED)
+	                .header(HttpHeaders.LOCATION, "/transfer")
+	                .build();
+
 	    } catch (IllegalArgumentException e) {
+	        // Ajout du message d'erreur dans les attributs de redirection
 	        redirectAttributes.addFlashAttribute("error", e.getMessage());
-	        return "redirect:/transfer"; // Redirection en cas d'erreur
+	        
+	        // Redirection vers /transfer avec erreur
+	        return ResponseEntity.status(HttpStatus.FOUND)
+	                .header(HttpHeaders.LOCATION, "/transfer")
+	                .build();
+	        
 	    } catch (Exception e) {
+	        // Ajout du message d'erreur dans les attributs de redirection
 	        redirectAttributes.addFlashAttribute("error", e.getMessage());
-	        return "redirect:/transfer";
+	        
+	        // Redirection vers /transfer en cas d'exception générale
+	        return ResponseEntity.status(HttpStatus.FOUND)
+	                .header(HttpHeaders.LOCATION, "/transfer")
+	                .build();
 	    }
 	}
+
 }

@@ -203,15 +203,17 @@ public class NavigationController {
 		try {
 			logger.debug("Récupération de l'utilisateur des connexions et transactions.");	
 			User userAuth = userService.getCurrentUser();
+			double solde = userAuth.getSolde();
 			List<User> connections = userService.getConnections();
 			List<Transactions> transactions = transactionService.getAllTransactionById();
 
 			logger.debug("Liste des connexions : {} ", connections);
 			logger.debug("Liste des transactions : {} ", transactions);
+			logger.debug("Le solde de l'utilisateur : {} ", solde);
 
 			model.addAttribute("connections", connections);
 			model.addAttribute("transactions", transactions);
-			model.addAttribute("solde", userAuth.getSolde());
+			model.addAttribute("solde", solde);
 
 			logger.info("Données de transfert récupérées avec succès.");
 			return "transfer";

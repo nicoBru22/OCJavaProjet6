@@ -75,12 +75,25 @@ public class NavigationControllerTest {
     public void testAfficherPageTransfer() throws Exception {
         List<User> connections = new ArrayList<>();
         List<Transactions> transactions = new ArrayList<>();
+        
+        User userAuth = new User();
+        userAuth.setId(1L);
+        userAuth.setUsername("nicolas");
+        userAuth.setEmail("nicolasTest@test.fr");
+        userAuth.setRole("user");
+        userAuth.setPassword("password123");
+        userAuth.setConnections(connections);
+        userAuth.setSolde(100);
+    	
+    	when(userService.getCurrentUser()).thenReturn(userAuth);
     	
         mockMvc.perform(get("/transfer"))
         	.andExpect(status().isOk())
         	.andExpect(view().name("transfer"))
         	.andExpect(model().attribute("connections", connections))
         	.andExpect(model().attribute("transactions", transactions));
+        
+        verify(userService, times(1)).getCurrentUser();
     }
     
     @Test
@@ -138,7 +151,7 @@ public class NavigationControllerTest {
     @Test
     @WithMockUser(username = "testUser", roles = "USER")
     void testAfficherPageTransfer_Exception() throws Exception {
-        when(userService.getConnections()).thenThrow(new RuntimeException("Erreur simulée pour les connexions"));
+        when(userService.getCurrentUser()).thenThrow(new RuntimeException("Erreur simulée pour les connexions"));
 
         mockMvc.perform(get("/transfer"))
             .andExpect(status().isOk())
@@ -146,7 +159,7 @@ public class NavigationControllerTest {
             .andExpect(model().attributeExists("error"))
             .andExpect(model().attribute("error", "Une erreur s'est produite lors du chargement des données."));
 
-        verify(userService, times(1)).getConnections();
+        verify(userService, times(1)).getCurrentUser();
     }
 
  
