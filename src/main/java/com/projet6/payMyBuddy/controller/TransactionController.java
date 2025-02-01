@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projet6.payMyBuddy.service.TransactionService;
 
@@ -60,18 +61,19 @@ public class TransactionController {
 	 * @throws Exception Si une erreur se produit lors de l'ajout de la transaction.
 	 */
 	@PostMapping("/add_transaction")
-	public ResponseEntity<?> addTransaction(@RequestParam String email, @RequestParam String description,
-			@RequestParam double amount, HttpServletResponse response) throws Exception {
-		logger.info("Entrée dans la méthode addTransaction de la classe TransactionController.");
-		logger.debug("Les données en paramètre : email : {}, description : {}, amount : {}", email, description,
-				amount);
-
-		transactionService.addTransaction(email, description, amount);
-
-	    // Redirection vers /transfer
-	    response.sendRedirect("/transfer");
-
-	    // Vous pouvez aussi retourner un ResponseEntity pour indiquer que la transaction est ajoutée
-	    return ResponseEntity.status(HttpStatus.CREATED).build();
+	public String addTransaction(@RequestParam String email,
+	                             @RequestParam String description,
+	                             @RequestParam double amount,
+	                             RedirectAttributes redirectAttributes) {
+	    try {
+	        transactionService.addTransaction(email, description, amount);
+	        return "redirect:/transfer"; // Redirection en cas de succès
+	    } catch (IllegalArgumentException e) {
+	        redirectAttributes.addFlashAttribute("error", e.getMessage());
+	        return "redirect:/transfer"; // Redirection en cas d'erreur
+	    } catch (Exception e) {
+	        redirectAttributes.addFlashAttribute("error", e.getMessage());
+	        return "redirect:/transfer";
+	    }
 	}
 }

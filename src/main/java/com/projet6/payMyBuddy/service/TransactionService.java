@@ -1,9 +1,6 @@
 package com.projet6.payMyBuddy.service;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -69,44 +66,44 @@ public class TransactionService {
             User sender = userService.getCurrentUser();
             User receiver = userRepository.findByEmail(email);
 
-            logger.debug("L'utilisateur émetteur (sender) : {}", sender);
-            logger.debug("L'utilisateur destinataire (receiver) : {}", receiver);
-
             if (receiver == null) {
-                logger.error("Le destinataire avec l'email {} n'existe pas.", email);
                 throw new Exception("Destinataire introuvable.");
-            } else {
-            	double bankCommission = getBankCommission(amount);
-            	double amountTransactionTotal = bankCommission + amount;
-            	
-            	double senderSolde = sender.getSolde();
-            	double senderNewSolde = senderSolde - amount;
-            	double receiverSolde = receiver.getSolde();
-            	double receiverNewSolde = receiverSolde + amount;
-            	
-            	if(senderNewSolde < 0) {
-            		logger.error("Le solde de l'envoyeur ne peut pas être inférieur à 0.");
-            		throw new IllegalArgumentException("Le solde de l'envoyeur ne peut pas être inférieur à 0.");
-            	} else {
-                	sender.setSolde(senderNewSolde);
-                	receiver.setSolde(receiverNewSolde);
-            	}         	
-            	
-                Transactions newTransaction = new Transactions();
-                newTransaction.setSender(sender);
-                newTransaction.setReceiver(receiver);
-                newTransaction.setDescription(description);
-                newTransaction.setAmount(amount);
-                newTransaction.setBankCommission(bankCommission);
-                newTransaction.setTotalAmount(amountTransactionTotal);
-
-                logger.debug("La nouvelle transaction à sauvegarder : {}", newTransaction);
-                return transactionRepository.save(newTransaction);
             }
+
+            double bankCommission = getBankCommission(amount);
+            double amountTransactionTotal = bankCommission + amount;
+            
+            double senderSolde = sender.getSolde();
+            double senderNewSolde = senderSolde - amount;
+
+            if (senderNewSolde < 0) {
+                throw new IllegalArgumentException("Le solde de l'envoyeur ne peut pas être inférieur à 0.");
+            }
+
+            double receiverSolde = receiver.getSolde();
+            double receiverNewSolde = receiverSolde + amount;
+
+            sender.setSolde(senderNewSolde);
+            receiver.setSolde(receiverNewSolde);
+            
+            Transactions newTransaction = new Transactions();
+            newTransaction.setSender(sender);
+            newTransaction.setReceiver(receiver);
+            newTransaction.setDescription(description);
+            newTransaction.setAmount(amount);
+            newTransaction.setBankCommission(bankCommission);
+            newTransaction.setTotalAmount(amountTransactionTotal);
+
+            return transactionRepository.save(newTransaction);
+
+        } catch (RuntimeException e) {
+            logger.error("Une erreur métier est survenue : {}", e.getMessage());
+            throw e; // Propage pour être capté dans le contrôleur
         } catch (Exception e) {
-            logger.error("Une erreur est survenue lors de l'ajout d'une nouvelle transaction.", e.getMessage());
+            logger.error("Une erreur est survenue lors de l'ajout d'une nouvelle transaction.", e);
             throw new Exception("Une erreur est survenue lors de l'ajout d'une nouvelle transaction.", e);
         }
+
     }
     
     /**

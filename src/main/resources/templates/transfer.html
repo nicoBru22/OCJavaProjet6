@@ -66,6 +66,10 @@
 				name="buttonPay"
 			>Payer</button>
 		</form>
+		<div id="divError" th:if="${error}">
+		    <p style="color: red;" th:text="${error}"></p>
+		</div>
+
 
 		<div id="containerDescriptionTransfer">
 			<div
