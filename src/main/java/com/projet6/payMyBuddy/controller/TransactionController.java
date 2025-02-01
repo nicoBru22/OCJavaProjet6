@@ -1,8 +1,10 @@
 package com.projet6.payMyBuddy.controller;
 
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projet6.payMyBuddy.service.TransactionService;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Contrôleur pour gérer les transactions dans l'application PayMyBuddy.
@@ -57,13 +61,17 @@ public class TransactionController {
 	 */
 	@PostMapping("/add_transaction")
 	public ResponseEntity<?> addTransaction(@RequestParam String email, @RequestParam String description,
-			@RequestParam double amount) throws Exception {
+			@RequestParam double amount, HttpServletResponse response) throws Exception {
 		logger.info("Entrée dans la méthode addTransaction de la classe TransactionController.");
 		logger.debug("Les données en paramètre : email : {}, description : {}, amount : {}", email, description,
 				amount);
 
 		transactionService.addTransaction(email, description, amount);
 
-		return ResponseEntity.status(HttpStatus.CREATED).header("location", "/transfer").build();
+	    // Redirection vers /transfer
+	    response.sendRedirect("/transfer");
+
+	    // Vous pouvez aussi retourner un ResponseEntity pour indiquer que la transaction est ajoutée
+	    return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 }

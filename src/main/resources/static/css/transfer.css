@@ -34,6 +34,10 @@
 	justify-content: space-around;
 }
 
+#containerDescriptionTransfer {
+	width: 80%;
+}
+
 #divColumnTable {
 	display: flex;
 	flex-direction: row;
@@ -89,4 +93,13 @@
 	font-size: 18px;
 	font-weight: bold;
 	padding: 10px;
+}
+
+#totalElementTable {
+	text-align: end;
+}
+
+#totalTable {
+	display: flex;
+	justify-content: flex-end;
 }

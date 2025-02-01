@@ -63,5 +63,8 @@ public class Transactions {
 	
 	@Column(nullable = false)
 	private Double bankCommission = 0.0;
+	
+	@Column
+	private double totalAmount;
 
 }

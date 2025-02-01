@@ -74,7 +74,7 @@ public class User {
 	private String password;
 	
 	@Column(nullable = false, columnDefinition = "FLOAT DEFAULT 0")
-	private float solde = 0;
+	private double solde = 0;
 
 
 	private String role;

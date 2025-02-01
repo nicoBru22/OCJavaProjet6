@@ -74,20 +74,11 @@
 				<div id="titleTable">Mes transactions</div>
 				<div id="headTable">
 					<div id="divColumnTable">
-						<div
-							id="relationTable"
-							class="columnTable"
-						>Relations</div>
-						<div
-							id="descriptionTable"
-							class="columnTable"
-						>Description</div>
-						<div
-							id="montantTable"
-							class="columnTable"
-						>Montant</div>
-						<div id="bankCommissionTable" class="columnTable"
-						>Commission</div>
+						<div id="relationTable" class="columnTable">Relations</div>
+						<div id="descriptionTable" class="columnTable">Description</div>
+						<div id="montantTable" class="columnTable">Montant</div>
+						<div id="bankCommissionTable" class="columnTable">Commission</div>
+						<div id="totalTable" class="columnTable">Total</div>
 					</div>
 				</div>
 				<div id="containerElementTable">
@@ -113,7 +104,11 @@
 						    th:text="${#numbers.formatDecimal(transaction.bankCommission, 1, 2)}"
 						    id="bankCommissionElementTable"
 						>Commission</div>
-
+						<div
+						    class="elementTable"
+						    th:text="${#numbers.formatDecimal(transaction.totalAmount, 1, 2)}"
+						    id="totalElementTable"
+						>Total</div>
 					</div>
 				</div>
 

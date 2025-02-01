@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.projet6.payMyBuddy.model.Transactions;
 import com.projet6.payMyBuddy.model.User;
@@ -60,6 +61,7 @@ public class TransactionService {
      * @return la transaction créée et sauvegardée.
      * @throws Exception si une erreur survient lors de l'ajout de la transaction ou si le destinataire est introuvable.
      */
+    @Transactional
     public Transactions addTransaction(String email, String description, double amount) throws Exception {
         logger.info("Entrée dans la méthode addTransaction de la classe TransactionService.");
         logger.debug("Les données en paramètre : email : {}, description : {}, amount : {}", email, description, amount);
@@ -75,6 +77,20 @@ public class TransactionService {
                 throw new Exception("Destinataire introuvable.");
             } else {
             	double bankCommission = getBankCommission(amount);
+            	double amountTransactionTotal = bankCommission + amount;
+            	
+            	double senderSolde = sender.getSolde();
+            	double senderNewSolde = senderSolde - amount;
+            	double receiverSolde = receiver.getSolde();
+            	double receiverNewSolde = receiverSolde + amount;
+            	
+            	if(senderNewSolde < 0) {
+            		logger.error("Le solde de l'envoyeur ne peut pas être inférieur à 0.");
+            		throw new IllegalArgumentException("Le solde de l'envoyeur ne peut pas être inférieur à 0.");
+            	} else {
+                	sender.setSolde(senderNewSolde);
+                	receiver.setSolde(receiverNewSolde);
+            	}         	
             	
                 Transactions newTransaction = new Transactions();
                 newTransaction.setSender(sender);
@@ -82,16 +98,25 @@ public class TransactionService {
                 newTransaction.setDescription(description);
                 newTransaction.setAmount(amount);
                 newTransaction.setBankCommission(bankCommission);
+                newTransaction.setTotalAmount(amountTransactionTotal);
 
                 logger.debug("La nouvelle transaction à sauvegarder : {}", newTransaction);
                 return transactionRepository.save(newTransaction);
             }
         } catch (Exception e) {
-            logger.error("Une erreur est survenue lors de l'ajout d'une nouvelle transaction.", e);
+            logger.error("Une erreur est survenue lors de l'ajout d'une nouvelle transaction.", e.getMessage());
             throw new Exception("Une erreur est survenue lors de l'ajout d'une nouvelle transaction.", e);
         }
     }
     
+    /**
+     * Calcule la commission de la banque sur la transaction.
+     * 
+     * 
+     * @param amount montant de la transaction.
+     * @return le montant de la commission que prend la banque.
+     * @exception si une erreur survient lors de la récupération de la commission bancaire.
+     */
     public double getBankCommission(double amount) {
     	logger.info("Entrée dans la méthode TransactionService.getBankCommission");
     	try {
