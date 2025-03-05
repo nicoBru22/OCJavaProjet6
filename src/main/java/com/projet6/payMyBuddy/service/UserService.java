@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import com.projet6.payMyBuddy.exception.UserInvalidRequestException;
+import com.projet6.payMyBuddy.exception.UserNotFoundException;
 import com.projet6.payMyBuddy.model.User;
 import com.projet6.payMyBuddy.repository.UserRepository;
 
@@ -47,33 +49,29 @@ public class UserService {
 	 *                   l'utilisateur
 	 */
 
-	public User getCurrentUser() throws Exception {
+	public User getCurrentUser(){
 		logger.info("Entrée dans la méthode UserService.getcurrentUser().");
-		try {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			logger.debug("L'authentification : {} ", authentication);
-			Object principal = authentication.getPrincipal();
-			logger.debug("L'object principal : {} ", principal);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		logger.debug("L'authentification : {} ", authentication);
+		Object principal = authentication.getPrincipal();
+		logger.debug("L'object principal : {} ", principal);
 
-			if (principal instanceof OAuth2User) { // Vérifiez que l'utilisateur est authentifié via OAuth2
-				User oAuthUser = getUserWithOauth((OAuth2User) principal); // Cast explicite
-				return oAuthUser;
+		if (principal instanceof OAuth2User) { // Vérifiez que l'utilisateur est authentifié via OAuth2
+			User oAuthUser = getUserWithOauth((OAuth2User) principal); // Cast explicite
+			return oAuthUser;
 
-			} else if (principal instanceof UserDetails) {
-				logger.debug("Utilisateur authentifié sur le site.");
-				User currentUser = getUserWithUserDetails();
-				logger.debug("Le currentUser : {} ", currentUser);
+		} else if (principal instanceof UserDetails) {
+			logger.debug("Utilisateur authentifié sur le site.");
+			User currentUser = getUserWithUserDetails();
+			logger.debug("Le currentUser : {} ", currentUser);
 
-				if (currentUser != null) {
-					logger.info("Utilisateur trouvé : {}", currentUser.getUsername());
-					return currentUser;
-				} else {
-					logger.error("Utilisateur non trouvé dans la base de données.");
-					return null;
-				}
+			if (currentUser != null) {
+				logger.info("Utilisateur trouvé : {}", currentUser.getUsername());
+				return currentUser;
+			} else {
+				logger.error("Utilisateur non trouvé dans la base de données.");
+				throw new UserNotFoundException("L'utilisateur n'existe pas en base de donnée.");
 			}
-		} catch (Exception e) {
-			throw new Exception("Une erreur s'est produite.");
 		}
 		return null;
 	}
@@ -98,7 +96,6 @@ public class UserService {
 
 	public User getUserWithUserDetails() {
 		logger.info("Entrée dans la méthode userService.getUserWithUserDetails.");
-		try {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 			if (principal instanceof UserDetails) {
@@ -107,12 +104,8 @@ public class UserService {
 				return userRepository.findByEmail(email);
 			} else {
 				logger.warn("Le principal n'est pas une instance de UserDetails : {}", principal);
-				return null;
-			}
-		} catch (Exception e) {
-			logger.error("Erreur lors de la récupération de l'utilisateur actuel", e);
-			return null;
-		}
+		        throw new UserInvalidRequestException("Le principal ne correspond pas à un utilisateur valide.");			
+	        }
 	}
 
 	/**
@@ -132,9 +125,8 @@ public class UserService {
 	 *                   création de l'utilisateur
 	 */
 
-	public User getUserWithOauth(OAuth2User oAuth2User) throws Exception {
+	public User getUserWithOauth(OAuth2User oAuth2User) {
 		logger.info("Entrée dans la méthode UserService.getUserWithOAuth().");
-		try {
 			String username = oAuth2User.getAttribute("login");
 			String email = oAuth2User.getAttribute("email");
 
@@ -152,10 +144,6 @@ public class UserService {
 			}
 			logger.debug("Utilisateur trouvé : {}", oAuthUser.getUsername());
 			return oAuthUser;
-		} catch (Exception e) {
-			logger.error("Une erreur est survenue dans la récupération de l'utilisateur.");
-			throw new Exception("Une erreur est survenue dans la récupération de l'utilisateur." + e);
-		}
 	}
 
 	/**
@@ -170,18 +158,19 @@ public class UserService {
 	 * @throws Exception si une erreur survient lors de la récupération de la liste
 	 *                   des utilisateurs.
 	 */
-	public List<User> getAllUser() throws Exception {
-		logger.info("Entreé dans la méthode userService.getAllUser().");
-		try {
-			List<User> userList = userRepository.findAll();
-			logger.debug("La liste des utilisateurs : {} ", userList);
-			return userList;
-		} catch (Exception e) {
-			logger.error("une erreur est survenue lors de la récupération de la liste des utilisateurs.");
-			throw new Exception("une erreur est survenue lors de la récupération de la liste des utilisateurs." + e);
-		}
-
+	public List<User> getAllUser() {
+	    logger.info("Entrée dans la méthode userService.getAllUser().");
+	    
+	    List<User> userList = userRepository.findAll();
+	    if (userList.isEmpty()) {
+	        logger.warn("Aucun utilisateur trouvé.");
+	        throw new UserNotFoundException("Aucun utilisateur trouvé.");
+	    }
+	    
+	    logger.debug("La liste des utilisateurs : {}", userList);
+	    return userList;
 	}
+
 
 	/**
 	 * Ajoute une nouvel connexion entre utilisateur.
@@ -198,34 +187,33 @@ public class UserService {
 	 * @throws Exception si un utilisateur n'est pas trouvé via l'email ou si une
 	 *                   erreur se produit pendant l'ajout.
 	 */
-	public void addConnection(String email) throws Exception {
-		try {
-			logger.debug("l'email dans le service = " + email);
-			User actualUser = getCurrentUser();
-			User userToAdd = userRepository.findByEmail(email);
-			logger.info("l actualUser = " + actualUser);
-			logger.info("le userToAdd = " + userToAdd);
+	public void addConnection(String email) {
+	    logger.debug("L'email dans le service = {}", email);
+	    
+	    User actualUser = getCurrentUser();
+	    User userToAdd = userRepository.findByEmail(email);
 
-			if (userToAdd == null) {
-				logger.error("utilisateur non trouvé avec l'email : " + email);
-				throw new RuntimeException("Utilisateur non trouvé avec l'email : " + email);
-			}
-			if (!actualUser.getConnections().contains(userToAdd)) {
-				actualUser.getConnections().add(userToAdd);
-			}
-			if (!userToAdd.getConnections().contains(actualUser)) {
-				userToAdd.getConnections().add(actualUser);
-			}
+	    logger.info("ActualUser = {}", actualUser);
+	    logger.info("UserToAdd = {}", userToAdd);
 
-			userRepository.save(actualUser);
-			userRepository.save(userToAdd);
-		} catch (Exception e) {
-			logger.error("Une erreur s'est produite lors de l'ajout d'une nouvelle relation pour l'email : " + email);
-			throw new Exception(
-					"Une erreur s'est produite lors de l'ajout d'une nouvelle relation pour l'email : " + email);
-		}
+	    if (userToAdd == null) {
+	        logger.error("Utilisateur non trouvé avec l'email : {}", email);
+	        throw new UserNotFoundException("Utilisateur non trouvé avec l'email : " + email);
+	    }
 
+	    if (!actualUser.getConnections().contains(userToAdd)) {
+	        actualUser.getConnections().add(userToAdd);
+	    }
+	    
+	    if (!userToAdd.getConnections().contains(actualUser)) {
+	        userToAdd.getConnections().add(actualUser);
+	    }
+
+	    userRepository.save(actualUser);
+	    userRepository.save(userToAdd);
+	    logger.info("Les utilisateurs ont été connectés avec succès.");
 	}
+
 
 	/**
 	 * Ajoute un nouvel utilisateur à la base de donnée.
@@ -244,9 +232,8 @@ public class UserService {
 	 * @throws Exception si un problème a eu lieu lors de l'ajout du nouvel
 	 *                   utilisateur.
 	 */
-	public User addUser(String username, String email, String password) throws Exception {
+	public User addUser(String username, String email, String password){
 		logger.debug("Entrée dans la méthode addUser de la class UserService");
-		try {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String encodedPassword = encoder.encode(password);
 
@@ -260,9 +247,6 @@ public class UserService {
 			logger.debug("le nouvel utilisateur : {}" + newUser);
 
 			return userRepository.save(newUser);
-		} catch (Exception e) {
-			throw new Exception("Un probleme a eu lieu lors de l ajout d'un nouvel utilisateur : {}", e);
-		}
 
 	}
 
@@ -280,23 +264,16 @@ public class UserService {
 	 * @throws Exception une exception est levée si une erreur survient lors de la
 	 *                   récupération des connexions ou si l'utilisateur est null.
 	 */
-	public List<User> getConnections() throws Exception {
+	public List<User> getConnections() {
 		logger.info("Entrée dans la méthode UserService.getConnections().");
 		User currentUser = null;
-		try {
 			currentUser = getCurrentUser();
 			logger.debug("Voici le currentUser : {} ", currentUser);
 			if (currentUser == null) {
 				logger.error("Le currentUser est null.");
-				throw new Exception("Le currentUser est null.");
+				throw new UserInvalidRequestException("Le currentUser est null.");
 			}
 			return currentUser.getConnections();
-		} catch (Exception e) {
-			logger.error(
-					"Une erreur est survenue lors de la récupération des connections pour l'utilisateur : {}. Détails : {}",
-					currentUser, e);
-			throw new Exception("Une erreur est survenue lors de la récupération des connections." + e);
-		}
 	}
 
 }
