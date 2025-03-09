@@ -13,13 +13,18 @@
 	    <div id="container">
 	        <div id="signinDiv">
 	            <h1 id="titleForm">Pay My Buddy</h1>
+	            
+	             <div th:if="${error}" style="color: red;">
+                <p th:text="${error}"></p>
+                
+            </div>
 	            <form 
 	            	id="signinForm" 
 	            	th:action="@{/users/add_user}" 
 	            	method="post">
 	                <div id="inputDiv">
-	                    <input name="username" id="username" class="inputForm" type="text" placeholder="username">
-	                    <input name="email" id="email" class="inputForm" type="email" placeholder="email">
+	                    <input name="username" id="username" class="inputForm" type="text" placeholder="username" th:value="${username}">
+	                    <input name="email" id="email" class="inputForm" type="email" placeholder="email" th:value="${email}">
 	                    <input name="password" id="password" class="inputForm" type="password" placeholder="password">
 	                </div>
 	                <button id="signinButtonForm" type="submit">Créer un compte</button>

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.projet6.payMyBuddy.exception.UserRequestAddInvalidException;
 import com.projet6.payMyBuddy.model.User;
 import com.projet6.payMyBuddy.service.UserService;
 
@@ -70,14 +72,10 @@ public class UserController {
 	 *                   utilisateurs.
 	 */
 	@GetMapping("/list_user")
-	public ResponseEntity<?> getAllUser() throws Exception {
+	public ResponseEntity<List<User>> getAllUser() {
+		logger.info("Entrée dans le controller pour récupérer la liste des utilisateurs.");
 		List<User> userList = userService.getAllUser();
-
-		if (userList.isEmpty()) {
-			return ResponseEntity.noContent().build();
-		} else {
-			return ResponseEntity.ok(userList);
-		}
+		return ResponseEntity.ok(userList); //renvoie un tableau vide si la liste est vide.
 	}
 
 	/**
@@ -91,14 +89,25 @@ public class UserController {
 	 * @throws Exception Si une erreur se produit lors de l'ajout de l'utilisateur.
 	 */
 	@PostMapping("/add_user")
-	public ResponseEntity<Void> addUser(@RequestParam String username, @RequestParam String email,
-			@RequestParam String password) throws Exception {
-		logger.info("Entrée dans le controller /users/add_user.");
-		logger.debug("Les données en paramètre sont : username : {}, email : {}, password : {}", username, email,
-				password);
-		userService.addUser(username, email, password);
-		return ResponseEntity.status(HttpStatus.CREATED).header("Location", "/profil").build();
+	public String addUser(@RequestParam String username, 
+	                      @RequestParam String email,
+	                      @RequestParam String password, 
+	                      RedirectAttributes redirectAttributes) {
+	    logger.info("Entrée dans le controller pour l'ajout d'un nouvel utilisateur.");
+		try {
+		    userService.addUser(username, email, password);
+		    redirectAttributes.addFlashAttribute("info", "Votre compte a été créé avec succès, veuillez vous connecter.");
+		    redirectAttributes.addFlashAttribute("email", email);
+		    return "redirect:/login";
+		} catch (UserRequestAddInvalidException e) {
+	        redirectAttributes.addFlashAttribute("error", e.getMessage());
+	        redirectAttributes.addFlashAttribute("username", username);
+	        redirectAttributes.addFlashAttribute("email", email);
+	        return "redirect:/signin";
+	    }
 	}
+	
+
 
 	/**
 	 * Ajoute une connexion à un utilisateur en fonction de l'email fourni.

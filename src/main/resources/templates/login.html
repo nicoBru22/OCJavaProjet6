@@ -11,9 +11,14 @@
 	    <div id="container">
 	        <div id="loginDiv">
 	            <h1 id="titleForm">Pay My Buddy</h1>
+	            
+	             <div th:if="${info}" style="color: green;">
+                	<p th:text="${info}"></p>
+            	</div>
+                
 	            <form id="loginForm" action="#" th:action="@{/login}" method="post">
 	                <div id="inputDiv">
-	                    <input name="username" id="email" class="inputForm" type="text" placeholder="email">
+	                    <input name="username" id="email" class="inputForm" type="text" placeholder="email" th:value="${email}">
 	                    <input name="password" id="password" class="inputForm" type="password" placeholder="password">
 	                </div>
 	                <div id="divError" th:if="${param.error}">

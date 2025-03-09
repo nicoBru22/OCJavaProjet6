@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.projet6.payMyBuddy.exception.UserInvalidRequestException;
 import com.projet6.payMyBuddy.exception.UserNotFoundException;
+import com.projet6.payMyBuddy.exception.UserRequestAddInvalidException;
 import com.projet6.payMyBuddy.model.User;
 import com.projet6.payMyBuddy.repository.UserRepository;
 
@@ -234,19 +235,27 @@ public class UserService {
 	 */
 	public User addUser(String username, String email, String password){
 		logger.debug("Entrée dans la méthode addUser de la class UserService");
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			String encodedPassword = encoder.encode(password);
+		
+	    if (username == null || username.isEmpty() || 
+		        email == null || email.isEmpty() || 
+		        password == null || password.isEmpty()) {
+	    	logger.error("Tous les champs sont requis. Username : {}, Email : {}, Password : {}", username, email, password);
+	    	throw new UserRequestAddInvalidException("Tous les champs sont requis.");
+	    }
+	    
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodedPassword = encoder.encode(password);
 
-			User newUser = new User();
-			newUser.setUsername(username);
-			newUser.setEmail(email);
-			newUser.setPassword(encodedPassword);
-			newUser.setSolde(50);
-			newUser.setRole("user");
+		User newUser = new User();
+		newUser.setUsername(username);
+		newUser.setEmail(email);
+		newUser.setPassword(encodedPassword);
+		newUser.setSolde(50);
+		newUser.setRole("user");
 
-			logger.debug("le nouvel utilisateur : {}" + newUser);
-
-			return userRepository.save(newUser);
+		logger.debug("le nouvel utilisateur : {}" + newUser);
+		
+		return userRepository.save(newUser);
 
 	}
 

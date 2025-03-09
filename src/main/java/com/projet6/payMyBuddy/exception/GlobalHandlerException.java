@@ -1,5 +1,7 @@
 package com.projet6.payMyBuddy.exception;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -9,13 +11,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalHandlerException {
 	
+	private Logger logger = LogManager.getLogger(GlobalHandlerException.class);
+	
+//Gestion des erreurs User
+	
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> handleUserException(UserNotFoundException e) {
+    public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException e) {
+    	logger.error("L'utilisateur n'existe pas : {}", e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
     
     @ExceptionHandler(UserExistException.class)
-    public ResponseEntity<String> handlerUserException(UserExistException e) {
+    public ResponseEntity<String> handlerUserExistsException(UserExistException e) {
     	return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
     
@@ -24,9 +31,23 @@ public class GlobalHandlerException {
     	return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     
+    @ExceptionHandler(UserRequestAddInvalidException.class)
+    public ResponseEntity<String> handleUserRequestAddInvalidException(UserRequestAddInvalidException e) {
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGlobalException(Exception e) {
-        return new ResponseEntity<>("Une erreur interne est survenue : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    	logger.error("Une erreur interne est survenue : {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
 
