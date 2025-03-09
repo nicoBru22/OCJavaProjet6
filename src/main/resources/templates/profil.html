@@ -25,6 +25,11 @@
 	<div id="profil">
 		<div id="conteinerProfil">
 			<div id="elementsProfil">
+			
+			<div th:if="${info}" style="color: green;">
+				<p th:text="${info}"></p>
+			</div>
+			
 				<div class="elementProfil">
 					<div
 						id="username"

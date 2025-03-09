@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import com.projet6.payMyBuddy.exception.UserInvalidRequestException;
+import com.projet6.payMyBuddy.exception.InvalidRequestException;
 import com.projet6.payMyBuddy.exception.UserNotFoundException;
 import com.projet6.payMyBuddy.exception.UserRequestAddInvalidException;
 import com.projet6.payMyBuddy.model.User;
@@ -66,13 +66,14 @@ public class UserService {
 			User currentUser = getUserWithUserDetails();
 			logger.debug("Le currentUser : {} ", currentUser);
 
-			if (currentUser != null) {
-				logger.info("Utilisateur trouvé : {}", currentUser.getUsername());
-				return currentUser;
-			} else {
-				logger.error("Utilisateur non trouvé dans la base de données.");
-				throw new UserNotFoundException("L'utilisateur n'existe pas en base de donnée.");
+			if (currentUser == null) {
+				logger.error("Utilisateur non trouvé dans la base de données : {} ", currentUser);
+				throw new UserNotFoundException("L'utilisateur n'existe pas en base de donnée : "+ currentUser);
 			}
+			
+			logger.info("Utilisateur trouvé : {}", currentUser.getUsername());
+			return currentUser;
+
 		}
 		return null;
 	}
@@ -105,7 +106,7 @@ public class UserService {
 				return userRepository.findByEmail(email);
 			} else {
 				logger.warn("Le principal n'est pas une instance de UserDetails : {}", principal);
-		        throw new UserInvalidRequestException("Le principal ne correspond pas à un utilisateur valide.");			
+		        throw new UserNotFoundException("Le principal ne correspond pas à un utilisateur valide.");			
 	        }
 	}
 
@@ -128,23 +129,25 @@ public class UserService {
 
 	public User getUserWithOauth(OAuth2User oAuth2User) {
 		logger.info("Entrée dans la méthode UserService.getUserWithOAuth().");
-			String username = oAuth2User.getAttribute("login");
-			String email = oAuth2User.getAttribute("email");
+		
+		String username = oAuth2User.getAttribute("login");
+		String email = oAuth2User.getAttribute("email");
 
-			logger.debug("L'utilisateur se connecte avec pour email : {} et pour username : {} ", email, username);
+		logger.debug("L'utilisateur se connecte avec pour email : {} et pour username : {} ", email, username);
 
-			User oAuthUser = userRepository.findByEmail(email);
+		User oAuthUser = userRepository.findByEmail(email);
 
-			if (oAuthUser == null) {
-				logger.debug("Utilisateur non trouvé, création d'un nouvel utilisateur.");
+		if (oAuthUser == null) {
+			logger.debug("Utilisateur non trouvé, création d'un nouvel utilisateur.");
 
-				String password = "test";
-				User newUser = addUser(username, email, password);
+			String password = "test";
+			User newUser = addUser(username, email, password);
 
-				return newUser;
-			}
-			logger.debug("Utilisateur trouvé : {}", oAuthUser.getUsername());
-			return oAuthUser;
+			return newUser;
+		}
+		
+		logger.debug("Utilisateur trouvé : {}", oAuthUser.getUsername());
+		return oAuthUser;
 	}
 
 	/**
@@ -191,6 +194,11 @@ public class UserService {
 	public void addConnection(String email) {
 	    logger.debug("L'email dans le service = {}", email);
 	    
+		if (email == null || email.isEmpty()) {
+			logger.error("Email invalide reçu : {}", email);
+			throw new InvalidRequestException("L'email est vide ou nul : "+ email);
+		}
+	    
 	    User actualUser = getCurrentUser();
 	    User userToAdd = userRepository.findByEmail(email);
 
@@ -201,18 +209,24 @@ public class UserService {
 	        logger.error("Utilisateur non trouvé avec l'email : {}", email);
 	        throw new UserNotFoundException("Utilisateur non trouvé avec l'email : " + email);
 	    }
+	    
+	    if(actualUser.getConnections().contains(userToAdd)) {
+	    	logger.warn("Une connexion existe déjà entre ces 2 utilisateurs.");
+	    	return;
+	    }
 
 	    if (!actualUser.getConnections().contains(userToAdd)) {
 	        actualUser.getConnections().add(userToAdd);
+		    userRepository.save(actualUser);
 	    }
 	    
 	    if (!userToAdd.getConnections().contains(actualUser)) {
 	        userToAdd.getConnections().add(actualUser);
+		    userRepository.save(userToAdd);
 	    }
-
-	    userRepository.save(actualUser);
-	    userRepository.save(userToAdd);
+	    
 	    logger.info("Les utilisateurs ont été connectés avec succès.");
+	    return;
 	}
 
 
@@ -275,14 +289,18 @@ public class UserService {
 	 */
 	public List<User> getConnections() {
 		logger.info("Entrée dans la méthode UserService.getConnections().");
+		
 		User currentUser = null;
-			currentUser = getCurrentUser();
-			logger.debug("Voici le currentUser : {} ", currentUser);
-			if (currentUser == null) {
-				logger.error("Le currentUser est null.");
-				throw new UserInvalidRequestException("Le currentUser est null.");
-			}
-			return currentUser.getConnections();
+		currentUser = getCurrentUser();
+		
+		logger.debug("Voici le currentUser : {} ", currentUser);
+		
+		if (currentUser == null) {
+			logger.error("Le currentUser est null : {}"+ currentUser);
+			throw new UserNotFoundException("Le currentUser est null." + currentUser);
+		}
+		
+		return currentUser.getConnections();
 	}
 
 }

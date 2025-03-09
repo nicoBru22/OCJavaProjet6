@@ -1,21 +1,11 @@
-<!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="fr">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta
-	name="viewport"
-	content="width=device-width, initial-scale=1.0"
->
-<title>Pay My Buddy</title>
-<link
-	rel="stylesheet"
-	th:href="@{/css/add_relation.css}"
->
-
-<link
-	rel="stylesheet"
-	th:href="@{/css/menu.css}"
->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pay My Buddy</title>
+	<link rel="stylesheet" th:href="@{/css/add_relation.css}">
+	<link rel="stylesheet" th:href="@{/css/menu.css}">
 </head>
 
 <body>
@@ -23,6 +13,11 @@
 
 	<div id="addUserPage">
 		<div id="addUserContainer">
+		
+		<div th:if="${error}">
+			<p th:text="${error}"></p>
+		</div>
+		
 			<form th:action="@{/users/add_connection}" method="post">
 				<div id="elementForm">
 					<label id="searchLable">Chercher une relation</label> 

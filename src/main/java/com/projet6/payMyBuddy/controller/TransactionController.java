@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.projet6.payMyBuddy.exception.InvalidRequestException;
+import com.projet6.payMyBuddy.exception.SoldeInvalidException;
+import com.projet6.payMyBuddy.exception.UserNotFoundException;
 import com.projet6.payMyBuddy.service.TransactionService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -61,36 +64,26 @@ public class TransactionController {
 	 * @throws Exception Si une erreur se produit lors de l'ajout de la transaction.
 	 */
 	@PostMapping("/add_transaction")
-	public ResponseEntity<String> addTransaction(@RequestParam String email,
-	                                             @RequestParam String description,
-	                                             @RequestParam double amount,
-	                                             RedirectAttributes redirectAttributes) {
+	public String addTransaction(@RequestParam String email,
+	                             @RequestParam String description,
+	                             @RequestParam double amount,
+	                             RedirectAttributes redirectAttributes) {
+
+	    logger.info("Tentative d'ajout d'une transaction. Email: {}, Description: {}, Montant: {}", email, description, amount);
+
 	    try {
 	        transactionService.addTransaction(email, description, amount);
-
-	        // Redirection vers /transfer avec statut 302 (Found)
-	        return ResponseEntity.status(HttpStatus.CREATED)
-	                .header(HttpHeaders.LOCATION, "/transfer")
-	                .build();
-
-	    } catch (IllegalArgumentException e) {
-	        // Ajout du message d'erreur dans les attributs de redirection
+	        logger.info("Transaction réussie pour l'email: {}", email);
+	        redirectAttributes.addFlashAttribute("info", "La transaction a été réalisée avec succès.");
+	        
+	    } catch (RuntimeException e) {
+	        logger.error("Erreur lors de l'ajout de la transaction : {}", e.getMessage());
 	        redirectAttributes.addFlashAttribute("error", e.getMessage());
-	        
-	        // Redirection vers /transfer avec erreur
-	        return ResponseEntity.status(HttpStatus.FOUND)
-	                .header(HttpHeaders.LOCATION, "/transfer")
-	                .build();
-	        
-	    } catch (Exception e) {
-	        // Ajout du message d'erreur dans les attributs de redirection
-	        redirectAttributes.addFlashAttribute("error", e.getMessage());
-	        
-	        // Redirection vers /transfer en cas d'exception générale
-	        return ResponseEntity.status(HttpStatus.FOUND)
-	                .header(HttpHeaders.LOCATION, "/transfer")
-	                .build();
 	    }
+
+	    return "redirect:/transfer";
 	}
+
+
 
 }

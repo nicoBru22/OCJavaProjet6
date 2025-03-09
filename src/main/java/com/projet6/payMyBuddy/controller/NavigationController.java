@@ -168,18 +168,21 @@ public class NavigationController {
 	@GetMapping("/profil")
 	public String afficherPageUserProfil(Model model) throws Exception {
 		logger.info("Tentative d'accès au profil utilisateur.");
+		
 		User userAuth = userService.getCurrentUser();
-		System.out.println("le userAuth : " + userAuth);
+		logger.debug("le userAuth : " + userAuth);
+		
 		if (userAuth == null) {
 			logger.debug("L'utilisateur n'a pas pu être identifié. L'utilisateur : {}", userAuth);
+			model.addAttribute("error", "l'utilisateur n'a pas été identifié.");
 			return "redirect:/login";
-		} else {
-			model.addAttribute("username", userAuth.getUsername());
-			model.addAttribute("email", userAuth.getEmail());
-			model.addAttribute("password", userAuth.getPassword());
-			model.addAttribute("solde", userAuth.getSolde());
-			return "/profil";
-		}
+		} 
+		
+		model.addAttribute("username", userAuth.getUsername());
+		model.addAttribute("email", userAuth.getEmail());
+		model.addAttribute("password", userAuth.getPassword());
+		model.addAttribute("solde", userAuth.getSolde());
+		return "/profil";
 	}
 
 	/**

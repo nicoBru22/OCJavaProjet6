@@ -26,13 +26,19 @@ public class GlobalHandlerException {
     	return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
     
-    @ExceptionHandler(UserInvalidRequestException.class)
-    public ResponseEntity<String> handlerUserException(UserInvalidRequestException e) {
+    @ExceptionHandler(InvalidRequestException.class)
+    public ResponseEntity<String> handlerInvalidRequestException(InvalidRequestException e) {
     	return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     
     @ExceptionHandler(UserRequestAddInvalidException.class)
     public ResponseEntity<String> handleUserRequestAddInvalidException(UserRequestAddInvalidException e) {
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+    
+    @ExceptionHandler(SoldeInvalidException.class)
+    public ResponseEntity<String> handleSoldeInvalidException(SoldeInvalidException e) {
+    	logger.error("Le solde ne peut pas être inférieur à 0.");
     	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
     

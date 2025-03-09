@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.projet6.payMyBuddy.exception.InvalidRequestException;
+import com.projet6.payMyBuddy.exception.UserNotFoundException;
 import com.projet6.payMyBuddy.exception.UserRequestAddInvalidException;
 import com.projet6.payMyBuddy.model.User;
 import com.projet6.payMyBuddy.service.UserService;
@@ -106,8 +107,6 @@ public class UserController {
 	        return "redirect:/signin";
 	    }
 	}
-	
-
 
 	/**
 	 * Ajoute une connexion à un utilisateur en fonction de l'email fourni.
@@ -120,19 +119,18 @@ public class UserController {
 	 * @throws Exception Si une erreur se produit lors de l'ajout de la connexion.
 	 */
 	@PostMapping("/add_connection")
-	public ResponseEntity<String> addConnection(@RequestParam String email) throws Exception {
+	public String addConnection(@RequestParam String email, RedirectAttributes redirectAttributes) {
+		logger.debug("L'email dans le controller : " + email);
 		try {
-			logger.debug("L'email dans le controller : " + email);
-			if (email == null || email.isEmpty()) {
-				logger.error("Email invalide reçu : {}", email);
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'email est obligatoire.");
-			}
 			userService.addConnection(email);
-			return ResponseEntity.status(HttpStatus.CREATED) // 201 Created
-					.header("Location", "/profil") // L'URL de redirection
-					.build();
-		} catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé avec l'email : " + email);
+			redirectAttributes.addFlashAttribute("info", "la connexion entre utilisateur a été effectuée avec succès.");
+			return "redirect:/profil";
+		} catch (InvalidRequestException e) {
+			redirectAttributes.addFlashAttribute("error", "L'adresse email est invalide.");
+			return "redirect:/add_relation";
+		} catch (UserNotFoundException e) {
+			redirectAttributes.addFlashAttribute("error", "L'utilisateur à cette adresse mail n'existe pas.");
+			return "redirect:/add_relation";
 		}
 	}
 }
