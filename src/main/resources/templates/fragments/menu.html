@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/menu.css}">
-</head>
-<body>
-
-    <div th:fragment="menu" id="divMenu">
-        <div id="titleMenu">Pay My Buddy</div>
-        
-       <div id="divMenuElement">
-	        <nav id="divNav">
-	            <div id="divTransferer" class="divMenuElementlink">
-	                <a href="/transfer">Transférer</a>
-	            </div>
-	            <div id="divProfil" class="divMenuElementLink">
-	                <a href="/profil">Profil</a>
-	            </div>
-	            <div id="divAjout" class="divMenuElementLink">
-	                <a href="/add_relation">Ajouter une relation</a>
-	            </div>
-	       
-	        <div id="divDeconnection">
-		        <a href="/logout" >Se déconnecter</a>
-			</div>
-			 </nav>
-        </div>
-    </div>
-
-</body>
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <link rel="stylesheet" th:href="@{/css/menu.css}">
+	</head>
+	<body>
+	
+	    <div th:fragment="menu" id="divMenu">
+	        <div id="titleMenu">Pay My Buddy</div>
+	        
+	       <div id="divMenuElement">
+		        <nav id="divNav">
+		            <div id="divTransferer" class="divMenuElementLink">
+		                <a href="/transfer">Transférer</a>
+		            </div>
+		            <div id="divProfil" class="divMenuElementLink">
+		                <a href="/profil">Profil</a>
+		            </div>
+		            <div id="divAjout" class="divMenuElementLink">
+		                <a href="/add_relation">Ajouter une relation</a>
+		            </div>
+			        <div id="divDeconnection">
+				        <a href="/logout" >Se déconnecter</a>
+					</div>
+				 </nav>
+	        </div>
+	    </div>
+	
+	</body>
 </html>

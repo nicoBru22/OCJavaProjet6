@@ -1,5 +1,6 @@
 package com.projet6.payMyBuddy.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -91,9 +92,9 @@ public class TransactionService {
         double senderSolde = sender.getSolde();
         double senderNewSolde = senderSolde - totalTransactionAmount;
 
-        if (senderNewSolde < 0) {  // Correction ici
+        if (senderNewSolde < 0) {
             logger.error("Solde insuffisant. Solde actuel = {}, Montant à débiter = {}", senderSolde, totalTransactionAmount);
-            throw new SoldeInvalidException("Le solde de l'envoyeur ne peut pas être inférieur à 0.");
+            throw new SoldeInvalidException("Solde insuffisant. Solde actuel = "+ senderSolde + ", Montant à débiter = "+ totalTransactionAmount);
         }
 
         // Mise à jour des soldes
@@ -149,17 +150,23 @@ public class TransactionService {
      * @return une liste de transactions dont l'utilisateur courant est l'émetteur.
      * @throws Exception si une erreur survient lors de la récupération des transactions.
      */
-    public List<Transactions> getAllTransactionById() throws Exception {
+    public List<Transactions> getAllTransactionById() {
         logger.info("Entrée dans la méthode getAllTransactionById() de la classe TransactionService.");
-        try {
-            User user = userService.getCurrentUser();
-            logger.debug("L'utilisateur courant est : {}", user);
-            List<Transactions> transactionList = transactionRepository.findBySender(user);
-            logger.debug("La liste des transactions : {}", transactionList);
-            return transactionList;
-        } catch (Exception e) {
-            logger.error("Une erreur est survenue lors de la récupération des transactions.", e);
-            throw new Exception("Une erreur est survenue lors de la récupération des transactions.", e);
+        
+        User user = userService.getCurrentUser();
+        logger.debug("L'utilisateur courant est : {}", user);
+        
+        List<Transactions> transactionUser = transactionRepository.findBySender(user);
+        List<Transactions> transactionReceiver = transactionRepository.findByReceiver(user);
+        
+        List<Transactions> transactionList = new ArrayList<>(transactionUser);
+        transactionList.addAll(transactionReceiver);
+        
+        if(transactionList.isEmpty()) {
+        	logger.warn("La liste est vide : {}", transactionList);
         }
+        
+        logger.debug("La liste des transactions : {}", transactionList);
+        return transactionList;
     }
 }

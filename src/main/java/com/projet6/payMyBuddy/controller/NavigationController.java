@@ -217,6 +217,7 @@ public class NavigationController {
 			model.addAttribute("connections", connections);
 			model.addAttribute("transactions", transactions);
 			model.addAttribute("solde", solde);
+			model.addAttribute("userId", userAuth.getId());
 
 			logger.info("Données de transfert récupérées avec succès.");
 			return "transfer";

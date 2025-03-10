@@ -103,3 +103,15 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+.transactionSender {
+    color: red;
+   	display: flex;
+	padding: 10px;
+}
+
+.transactionReceiver {
+    color: green;
+   	display: flex;
+	padding: 10px;
+}

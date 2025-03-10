@@ -1,124 +1,157 @@
-<!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta
-	name="viewport"
-	content="width=device-width, initial-scale=1.0"
->
-<title>Pay My Buddy</title>
-<link
-	rel="stylesheet"
-	th:href="@{/css/transfer.css}"
->
-<link
-	rel="stylesheet"
-	th:href="@{/css/menu.css}"
->
-</head>
-
-<body>
-	<div th:replace="~{fragments/menu :: menu}"></div>
-
-
-	<div id="containerTransfer">
-		<div class="divSolde">
-			<div id="solde">Solde :    </div>
-			<div id="numberSolde" th:text="${solde}"></div>
-		</div>
-		<form
-			th:action="@{/add_transaction}"
-			method="post"
-			id="formTransaction"
+	<head>
+		<meta charset="UTF-8">
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
 		>
-			<select
-				id="selectRelation"
-				th:name="email"
-				class="elementForm"
+		<title>Pay My Buddy</title>
+		<link
+			rel="stylesheet"
+			th:href="@{/css/transfer.css}"
+		>
+		<link
+			rel="stylesheet"
+			th:href="@{/css/menu.css}"
+		>
+	</head>
+
+	<body>
+		<div th:replace="~{fragments/menu :: menu}"></div>
+	
+	
+		<div id="containerTransfer">
+			<div class="divSolde">
+				<div id="solde">Solde :</div>
+				<div
+					id="numberSolde"
+					th:text="${solde}"
+				></div>
+			</div>
+			<form
+				th:action="@{/add_transaction}"
+				method="post"
+				id="formTransaction"
 			>
-				<option
-					value="optionDefault"
-					class="optionSelectRelation"
-				>Selectionnez une relation</option>
-				<!-- Boucle sur la liste des connexions et création des options -->
-				<option
-					th:each="connection : ${connections}"
-					th:value="${connection.email}"
-					th:text="${connection.email}"
-				></option>
-			</select> <input
-				id="inputDescription"
-				class="elementForm"
-				placeholder="Description"
-				name="description"
-			> <input
-				id="inputMontant"
-				class="elementForm"
-				name="amount"
-				type="number"
-				min="0"
-				step="0.01"
-				placeholder="0.00"
-			>€
-			<button
-				id="buttonSubmitTranscation"
-				type="submit"
-				name="buttonPay"
-			>Payer</button>
-		</form>
-		<div id="divError" th:if="${error}">
-		    <p style="color: red;" th:text="${error}"></p>
-		</div>
-
-
-		<div id="containerDescriptionTransfer">
+				<select
+					id="selectRelation"
+					th:name="email"
+					class="elementForm"
+				>
+					<option
+						value="optionDefault"
+						class="optionSelectRelation"
+					>Selectionnez une relation</option>
+					<option
+						th:each="connection : ${connections}"
+						th:value="${connection.email}"
+						th:text="${connection.email}"
+					></option>
+				</select> <input
+					id="inputDescription"
+					class="elementForm"
+					placeholder="Description"
+					name="description"
+				> <input
+					id="inputMontant"
+					class="elementForm"
+					name="amount"
+					type="number"
+					min="0"
+					step="0.01"
+					placeholder="0.00"
+					value=0
+				>€
+				<button
+					id="buttonSubmitTranscation"
+					type="submit"
+					name="buttonPay"
+				>Payer</button>
+			</form>
 			<div
-				id="tableau"
+				id="divError"
+				th:if="${error}"
 			>
-				<div id="titleTable">Mes transactions</div>
-				<div id="headTable">
-					<div id="divColumnTable">
-						<div id="relationTable" class="columnTable">Relations</div>
-						<div id="descriptionTable" class="columnTable">Description</div>
-						<div id="montantTable" class="columnTable">Montant</div>
-						<div id="bankCommissionTable" class="columnTable">Commission</div>
-						<div id="totalTable" class="columnTable">Total</div>
+				<p
+					style="color: red;"
+					th:text="${error}"
+				></p>
+			</div>
+	
+			<div
+				id="divInfo"
+				th:if="${info}"
+			>
+				<p
+					style="color: green;"
+					th:text="${info}"
+				></p>
+			</div>
+	
+	
+			<div id="containerDescriptionTransfer">
+				<div id="tableau">
+					<div id="titleTable">Mes transactions</div>
+					<div id="headTable">
+						<div id="divColumnTable">
+							<div
+								id="relationTable"
+								class="columnTable"
+							>Relations</div>
+							<div
+								id="descriptionTable"
+								class="columnTable"
+							>Description</div>
+							<div
+								id="montantTable"
+								class="columnTable"
+							>Montant</div>
+							<div
+								id="bankCommissionTable"
+								class="columnTable"
+							>Commission</div>
+							<div
+								id="totalTable"
+								class="columnTable"
+							>Total</div>
+						</div>
 					</div>
-				</div>
-				<div id="containerElementTable">
-					<div
-						th:each="transaction : ${transactions}"
-						class="rowTable"
-					>
+					<div id="containerElementTable">
 						<div
-							class="elementTable"
-							th:text="${transaction.receiver.username}"
-						>relationTest</div>
-						<div
-							class="elementTable"
-							th:text="${transaction.description}"
-						>descriptionTest</div>
-						<div
-							class="elementTable"
-							th:text="${transaction.amount}"
-							id="amountElementTable"
-						>montantTest</div>
-						<div
-						    class="elementTable"
-						    th:text="${#numbers.formatDecimal(transaction.bankCommission, 1, 2)}"
-						    id="bankCommissionElementTable"
-						>Commission</div>
-						<div
-						    class="elementTable"
-						    th:text="${#numbers.formatDecimal(transaction.totalAmount, 1, 2)}"
-						    id="totalElementTable"
-						>Total</div>
+							th:each="transaction : ${transactions}"
+							th:class="${transaction.sender.id == userId} ? 'transactionSender' : 'transactionReceiver'"
+							class="rowTable"
+						>
+							<div
+								class="elementTable"
+								th:text="${transaction.receiver.username}"
+							>relationTest</div>
+							<div
+								class="elementTable"
+								th:text="${transaction.description}"
+							>descriptionTest</div>
+							<div
+								class="elementTable"
+								th:text="${transaction.amount}"
+								id="amountElementTable"
+							>montantTest</div>
+							<div
+								class="elementTable"
+								th:text="${#numbers.formatDecimal(transaction.bankCommission, 1, 2)}"
+								id="bankCommissionElementTable"
+							>Commission</div>
+							<div
+								class="elementTable"
+								th:text="${#numbers.formatDecimal(transaction.totalAmount, 1, 2)}"
+								id="totalElementTable"
+							>Total</div>
+						</div>
 					</div>
+	
 				</div>
-
 			</div>
 		</div>
-	</div>
-
-</body>
+	
+	</body>
 </html>

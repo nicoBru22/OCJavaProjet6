@@ -4,20 +4,12 @@ package com.projet6.payMyBuddy.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.projet6.payMyBuddy.exception.InvalidRequestException;
-import com.projet6.payMyBuddy.exception.SoldeInvalidException;
-import com.projet6.payMyBuddy.exception.UserNotFoundException;
 import com.projet6.payMyBuddy.service.TransactionService;
-
-import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Contrôleur pour gérer les transactions dans l'application PayMyBuddy.
@@ -68,9 +60,7 @@ public class TransactionController {
 	                             @RequestParam String description,
 	                             @RequestParam double amount,
 	                             RedirectAttributes redirectAttributes) {
-
 	    logger.info("Tentative d'ajout d'une transaction. Email: {}, Description: {}, Montant: {}", email, description, amount);
-
 	    try {
 	        transactionService.addTransaction(email, description, amount);
 	        logger.info("Transaction réussie pour l'email: {}", email);
@@ -80,10 +70,6 @@ public class TransactionController {
 	        logger.error("Erreur lors de l'ajout de la transaction : {}", e.getMessage());
 	        redirectAttributes.addFlashAttribute("error", e.getMessage());
 	    }
-
 	    return "redirect:/transfer";
 	}
-
-
-
 }
