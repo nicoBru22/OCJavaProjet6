@@ -60,16 +60,17 @@ public class TransactionController {
 	                             @RequestParam String description,
 	                             @RequestParam double amount,
 	                             RedirectAttributes redirectAttributes) {
-	    logger.info("Tentative d'ajout d'une transaction. Email: {}, Description: {}, Montant: {}", email, description, amount);
+	    logger.debug("Tentative d'ajout d'une transaction. Email: {}, Description: {}, Montant: {}", email, description, amount);
 	    try {
 	        transactionService.addTransaction(email, description, amount);
 	        logger.info("Transaction réussie pour l'email: {}", email);
 	        redirectAttributes.addFlashAttribute("info", "La transaction a été réalisée avec succès.");
-	        
 	    } catch (RuntimeException e) {
 	        logger.error("Erreur lors de l'ajout de la transaction : {}", e.getMessage());
 	        redirectAttributes.addFlashAttribute("error", e.getMessage());
 	    }
 	    return "redirect:/transfer";
+
+
 	}
 }

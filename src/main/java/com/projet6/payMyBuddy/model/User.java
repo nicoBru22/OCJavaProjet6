@@ -73,9 +73,8 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	
-	@Column(nullable = false, columnDefinition = "FLOAT DEFAULT 0")
+	@Column(nullable = false, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
 	private double solde = 0;
-
 
 	private String role;
 

@@ -146,22 +146,6 @@ public class NavigationControllerTest {
     		.andExpect(redirectedUrl("/login")); 
     	
     	verify(userService, times(1)).getCurrentUser();    	
-    }
-    
-    @Test
-    @WithMockUser(username = "testUser", roles = "USER")
-    void testAfficherPageTransfer_Exception() throws Exception {
-        when(userService.getCurrentUser()).thenThrow(new RuntimeException("Erreur simulée pour les connexions"));
-
-        mockMvc.perform(get("/transfer"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("error"))
-            .andExpect(model().attributeExists("error"))
-            .andExpect(model().attribute("error", "Une erreur s'est produite lors du chargement des données."));
-
-        verify(userService, times(1)).getCurrentUser();
-    }
-
- 
+    } 
 
 }

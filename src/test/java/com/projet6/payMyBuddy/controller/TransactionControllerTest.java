@@ -3,6 +3,7 @@ package com.projet6.payMyBuddy.controller;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -47,8 +48,8 @@ public class TransactionControllerTest {
 				.param("email", emailTest)
 				.param("description", descriptionTest)
 		        .param("amount", String.valueOf(amountTest)))
-			.andExpect(status().isCreated())
-			.andExpect(header().string("location", "/transfer"));
+			.andExpect(status().is3xxRedirection())
+			.andExpect(redirectedUrl("/transfer"));
 	}
 
 }

@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projet6.payMyBuddy.exception.InvalidRequestException;
 import com.projet6.payMyBuddy.exception.UserNotFoundException;
-import com.projet6.payMyBuddy.exception.UserRequestAddInvalidException;
 import com.projet6.payMyBuddy.model.User;
 import com.projet6.payMyBuddy.service.UserService;
 
@@ -69,14 +68,13 @@ public class UserController {
 	 * 
 	 * @return La réponse contenant la liste des utilisateurs ou un statut HTTP 204
 	 *         (No Content) si la liste est vide.
-	 * @throws Exception Si une erreur se produit lors de la récupération des
-	 *                   utilisateurs.
 	 */
 	@GetMapping("/list_user")
 	public ResponseEntity<List<User>> getAllUser() {
 		logger.info("Entrée dans le controller pour récupérer la liste des utilisateurs.");
 		List<User> userList = userService.getAllUser();
-		return ResponseEntity.ok(userList); //renvoie un tableau vide si la liste est vide.
+		return ResponseEntity.ok(userList);
+
 	}
 
 	/**
@@ -94,19 +92,27 @@ public class UserController {
 	                      @RequestParam String email,
 	                      @RequestParam String password, 
 	                      RedirectAttributes redirectAttributes) {
-	    logger.info("Entrée dans le controller pour l'ajout d'un nouvel utilisateur.");
-		try {
-		    userService.addUser(username, email, password);
-		    redirectAttributes.addFlashAttribute("info", "Votre compte a été créé avec succès, veuillez vous connecter.");
-		    redirectAttributes.addFlashAttribute("email", email);
-		    return "redirect:/login";
-		} catch (UserRequestAddInvalidException e) {
+	    logger.debug("Entrée dans le controller pour l'ajout d'un nouvel utilisateur.");
+	    
+	    try {
+	        userService.addUser(username, email, password);
+	        
+	        redirectAttributes.addFlashAttribute("info", "Votre compte a été créé avec succès, veuillez vous connecter.");
+	        redirectAttributes.addFlashAttribute("email", email);
+	        
+	        logger.info("Création de l'utilisateur réussie, redirection vers la page login.");
+	        return "redirect:/login";
+	        
+	    } catch (RuntimeException e) {
 	        redirectAttributes.addFlashAttribute("error", e.getMessage());
 	        redirectAttributes.addFlashAttribute("username", username);
 	        redirectAttributes.addFlashAttribute("email", email);
+	        
+	        logger.error("Requête non valide, redirection vers la page signin.");
 	        return "redirect:/signin";
 	    }
 	}
+
 
 	/**
 	 * Ajoute une connexion à un utilisateur en fonction de l'email fourni.
@@ -120,17 +126,20 @@ public class UserController {
 	 */
 	@PostMapping("/add_connection")
 	public String addConnection(@RequestParam String email, RedirectAttributes redirectAttributes) {
-		logger.debug("L'email dans le controller : " + email);
-		try {
-			userService.addConnection(email);
-			redirectAttributes.addFlashAttribute("info", "la connexion entre utilisateur a été effectuée avec succès.");
-			return "redirect:/profil";
-		} catch (InvalidRequestException e) {
-			redirectAttributes.addFlashAttribute("error", "L'adresse email est invalide.");
-			return "redirect:/add_relation";
-		} catch (UserNotFoundException e) {
-			redirectAttributes.addFlashAttribute("error", "L'utilisateur à cette adresse mail n'existe pas.");
-			return "redirect:/add_relation";
-		}
+	    logger.debug("L'email dans le controller : " + email);
+	    try {
+	        userService.addConnection(email);
+	        redirectAttributes.addFlashAttribute("info", "La connexion entre utilisateurs a été effectuée avec succès.");
+	        return "redirect:/profil";
+	    } catch (InvalidRequestException e) {
+	        logger.error("InvalidRequestException attrapée : {}", e.getMessage()); // Ajoute ce log
+	        redirectAttributes.addFlashAttribute("error", "L'adresse email est invalide.");
+	        return "redirect:/add_relation";
+	    } catch (UserNotFoundException e) {
+	        logger.error("UserNotFoundException attrapée : {}", e.getMessage());
+	        redirectAttributes.addFlashAttribute("error", "L'utilisateur à cette adresse mail n'existe pas.");
+	        return "redirect:/add_relation";
+	    }
 	}
+
 }

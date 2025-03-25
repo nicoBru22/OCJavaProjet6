@@ -90,7 +90,7 @@ public class NavigationController {
 	 */
 	@GetMapping("/")
 	public String afficherPageAccueil(Model model) {
-		logger.info("Tentative d'accès à la page du profil.");
+		logger.debug("Tentative d'accès à la page du profil.");
 		return "profil";
 	}
 
@@ -108,7 +108,7 @@ public class NavigationController {
 	 */
 	@GetMapping("/login")
 	public String afficherPageLogIn(Model model) {
-		logger.info("Tentative d'accès à la page de connexion.");
+		logger.debug("Tentative d'accès à la page de connexion.");
 		return "login";
 	}
 
@@ -126,7 +126,7 @@ public class NavigationController {
 	 */
 	@GetMapping("/signin")
 	public String afficherPageSignIn(Model model) {
-		logger.info("Tentative d'accès à la page d'inscription.");
+		logger.debug("Tentative d'accès à la page d'inscription.");
 		return "signin";
 	}
 
@@ -144,7 +144,7 @@ public class NavigationController {
 	 */
 	@GetMapping("/add_relation")
 	public String afficherPageAddRelation(Model model) {
-		logger.info("Tentative d'accès à la page d'ajout de relation.");
+		logger.debug("Tentative d'accès à la page d'ajout de relation.");
 		return "add_relation";
 	}
 
@@ -166,8 +166,8 @@ public class NavigationController {
 	 *                   informations utilisateur.
 	 */
 	@GetMapping("/profil")
-	public String afficherPageUserProfil(Model model) throws Exception {
-		logger.info("Tentative d'accès au profil utilisateur.");
+	public String afficherPageUserProfil(Model model) {
+		logger.debug("Tentative d'accès au profil utilisateur.");
 		
 		User userAuth = userService.getCurrentUser();
 		logger.debug("le userAuth : " + userAuth);
@@ -202,30 +202,23 @@ public class NavigationController {
 	 */
 	@GetMapping("/transfer")
 	public String afficherPageTransfer(Model model) {
-		logger.info("Tentative d'accès à la page des transactions.");
-		try {
-			logger.debug("Récupération de l'utilisateur des connexions et transactions.");	
-			User userAuth = userService.getCurrentUser();
-			double solde = userAuth.getSolde();
-			List<User> connections = userService.getConnections();
-			List<Transactions> transactions = transactionService.getAllTransactionById();
+		logger.debug("Tentative d'accès à la page des transactions.");
+		
+		User userAuth = userService.getCurrentUser();
+		double solde = userAuth.getSolde();
+		List<User> connections = userService.getConnections();
+		List<Transactions> transactions = transactionService.getAllTransactionById();
 
-			logger.debug("Liste des connexions : {} ", connections);
-			logger.debug("Liste des transactions : {} ", transactions);
-			logger.debug("Le solde de l'utilisateur : {} ", solde);
+		logger.debug("Liste des connexions : {} ", connections);
+		logger.debug("Liste des transactions : {} ", transactions);
+		logger.debug("Le solde de l'utilisateur : {} ", solde);
 
-			model.addAttribute("connections", connections);
-			model.addAttribute("transactions", transactions);
-			model.addAttribute("solde", solde);
-			model.addAttribute("userId", userAuth.getId());
+		model.addAttribute("connections", connections);
+		model.addAttribute("transactions", transactions);
+		model.addAttribute("solde", solde);
+		model.addAttribute("userId", userAuth.getId());
 
-			logger.info("Données de transfert récupérées avec succès.");
-			return "transfer";
-		} catch (Exception e) {
-			logger.error("Erreur lors de la récupération des données pour la page de transfert.", e);
-			model.addAttribute("error", "Une erreur s'est produite lors du chargement des données.");
-			return "error";
-		}
+		return "transfer";
 	}
 
 }

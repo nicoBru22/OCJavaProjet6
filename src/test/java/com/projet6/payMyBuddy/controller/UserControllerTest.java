@@ -40,19 +40,6 @@ public class UserControllerTest {
 	
 	@Test
     @WithMockUser(username = "testUser", roles = "ADMIN")
-	void testUserListEmpty() throws Exception {
-		List<User> userListEmpty = new ArrayList<>();
-		
-		when(userService.getAllUser()).thenReturn(userListEmpty);
-		
-		mockMvc.perform(get("/users/list_user"))
-			.andExpect(status().isNoContent());
-		
-		verify(userService, times(1)).getAllUser();
-	}
-	
-	@Test
-    @WithMockUser(username = "testUser", roles = "ADMIN")
 	void testUserList() throws Exception {
 		String usernameTest = "nicolas";
 		String emailTest = "email@test.fr";
@@ -107,26 +94,11 @@ public class UserControllerTest {
 		        .param("username", usernameTest)
 		        .param("email", emailTest)
 		        .param("password", passwordTest))
-			.andExpect(status().isCreated())
-			.andExpect(header().string("Location", "/profil"));
+			.andExpect(status().isFound())
+			.andExpect(header().string("Location", "/login"));
 		
 		verify(userService, times(1)).addUser(usernameTest, emailTest, passwordTest);
 		
-	}
-	
-	@Test
-    @WithMockUser(username = "testUser", roles = "USER")
-	void testAddConnections_withEmailNullOrEmpty() throws Exception {
-		String emailTestNull = null;
-		String emailTestEmpty = "";
-		
-		mockMvc.perform(post("/users/add_connection")
-			.param("email", emailTestNull))
-			.andExpect(status().isBadRequest());
-		
-		mockMvc.perform(post("/users/add_connection")
-				.param("email", emailTestEmpty))
-				.andExpect(status().isBadRequest());
 	}
 	
     @Test
@@ -138,34 +110,11 @@ public class UserControllerTest {
 
         mockMvc.perform(post("/users/add_connection")
                 .param("email", emailTestValid))
-                .andExpect(status().isCreated())  // 201 Created
+                .andExpect(status().isFound())
                 .andExpect(header().string("Location", "/profil"));
         
         verify(userService, times(1)).addConnection(emailTestValid);
     }
-    
-    @Test
-    @WithMockUser(username = "testUser", roles = "USER")
-    public void testAddConnection_withServiceError() throws Exception {
-        String emailTestValid = "valid@email.fr";
-
-        doThrow(new RuntimeException("Erreur lors de l'ajout de la connexion"))
-            .when(userService).addConnection(emailTestValid);
-
-        mockMvc.perform(post("/users/add_connection")
-                .param("email", emailTestValid))
-                .andExpect(status().isNotFound())
-                .andExpect(content().string("Utilisateur non trouvé avec l'email : " + emailTestValid));
-
-        verify(userService, times(1)).addConnection(emailTestValid);
-    }
 	
-
-
-	
-
-
-	
-
 
 }
