@@ -62,7 +62,7 @@ public class TransactionService {
         logger.info("Entrée dans la méthode addTransaction de la classe TransactionService.");
         logger.debug("Les données en paramètre : email = {}, description = {}, amount = {}", email, description, amount);
         
-        if (email.isBlank()) {
+        if (email.isBlank() || email.equals("optionDefault")) {
             logger.error("L'email du destinataire est obligatoire. Email = {}.", email);
             throw new InvalidRequestException("L'email du destinataire est obligatoire. Email : "+ email);
         }

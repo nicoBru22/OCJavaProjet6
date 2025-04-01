@@ -60,18 +60,11 @@
 						<div id="password" class="element1">Mot de passe :</div>
 						<button type="button" onclick="togglePasswordVisibility()">👁</button>
 						<div id="divPassword" class="element2" th:data-password="${password}">**********</div>
-	
 					</div>
 					<div class="elementProfil">
-						<div
-							id="solde"
-							class="element1"
-						>Solde:</div>
-						<div
-							id="divSolde"
-							class="element2"
-							th:text="${solde}"
-						></div>
+						<div id="solde" class="element1">Solde:</div>
+						<div id="divSolde" class="elementSolde" th:text="${solde}" ></div>
+						<div> €</div>
 					</div>
 					
 				</div>

@@ -138,14 +138,14 @@ public class UserService {
 
 		User oAuthUser = userRepository.findByEmail(email);
 
-		if (oAuthUser == null) {
+	/*	if (oAuthUser == null) {
 			logger.debug("Utilisateur non trouvé, création d'un nouvel utilisateur.");
 
 			String password = "test";
 			User newUser = addUser(username, email, password);
 
 			return newUser;
-		}
+		}*/
 		
 		logger.debug("Utilisateur trouvé : {}", oAuthUser.getUsername());
 		return oAuthUser;
