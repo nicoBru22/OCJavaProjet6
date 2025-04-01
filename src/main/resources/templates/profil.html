@@ -1,91 +1,84 @@
 <!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta
-	name="viewport"
-	content="width=device-width, initial-scale=1.0"
->
-<title>Pay My Buddy</title>
-<link
-	rel="stylesheet"
-	th:href="@{/css/profil.css}"
->
-
-<link
-	rel="stylesheet"
-	th:href="@{/css/menu.css}"
->
+	<meta charset="UTF-8">
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1.0"
+	>
+	<title>Pay My Buddy</title>
+	<link
+		rel="stylesheet"
+		th:href="@{/css/profil.css}"
+	>
+	
+	<link
+		rel="stylesheet"
+		th:href="@{/css/menu.css}"
+	>
+	<script>
+	    function togglePasswordVisibility() {
+	        let passwordDiv = document.getElementById("divPassword");
+	        let actualPassword = passwordDiv.getAttribute("data-password");
+	        
+	        if (passwordDiv.innerText === "**********") {
+	            passwordDiv.innerText = actualPassword;
+	        } else {
+	            passwordDiv.innerText = "**********";
+	        }
+	    }
+	</script>
 </head>
 
-<body>
-	<div th:replace="~{fragments/menu :: menu}"></div>
-
-
-	<div id="profil">
-		<div id="conteinerProfil">
-			<div id="elementsProfil">
-			
-			<div th:if="${info}" style="color: green;">
-				<p th:text="${info}"></p>
-			</div>
-			
-				<div class="elementProfil">
-					<div
-						id="username"
-						class="element1"
-					>Username :</div>
-					<div
-						id="divUsername"
-						class="element2"
-						th:text="${username}"
-					></div>
+	<body>
+		<div th:replace="~{fragments/menu :: menu}"></div>
+	
+	
+		<div id="profil">
+			<div id="conteinerProfil">
+				<div id="elementsProfil">
+				<div th:if="${info}" style="color: green;">
+					<p th:text="${info}"></p>
 				</div>
 				<div class="elementProfil">
-					<div
-						id="mail"
-						class="element1"
-					>Mail :</div>
-					<div
-						id="divMail"
-						class="element2"
-						th:text="${email}"
-					></div>
+						<div id="username" class="element1">Username :</div>
+						<div
+							id="divUsername"
+							class="element2"
+							th:text="${username}"
+						></div>
+					</div>
+					<div class="elementProfil">
+						<div id="mail" class="element1">Mail :</div>
+						<div
+							id="divMail"
+							class="element2"
+							th:text="${email}"
+						></div>
+					</div>
+					<div class="elementProfil">
+						<div id="password" class="element1">Mot de passe :</div>
+						<button type="button" onclick="togglePasswordVisibility()">👁</button>
+						<div id="divPassword" class="element2" th:data-password="${password}">**********</div>
+	
+					</div>
+					<div class="elementProfil">
+						<div
+							id="solde"
+							class="element1"
+						>Solde:</div>
+						<div
+							id="divSolde"
+							class="element2"
+							th:text="${solde}"
+						></div>
+					</div>
+					
 				</div>
-				<div class="elementProfil">
-					<div
-						id="password"
-						class="element1"
-					>Mot de passe :</div>
-					<div
-						id="divPassword"
-						class="element2"
-						th:text="${password}"
-					></div>
+				<div id="divModifier">
+					<button id="buttonModifier">Modifier</button>
 				</div>
-				<div class="elementProfil">
-					<div
-						id="solde"
-						class="element1"
-					>Solde:</div>
-					<div
-						id="divSolde"
-						class="element2"
-						th:text="${solde}"
-					></div>
-				</div>
-				
-			</div>
-			<div id="divModifier">
-				<button id="buttonModifier">Modifier</button>
 			</div>
 		</div>
-
-
-	</div>
-
-
-
-
-</body>
+	</body>
 </html>

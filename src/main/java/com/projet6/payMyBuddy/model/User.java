@@ -79,7 +79,9 @@ public class User {
 	private String role;
 
 	@ManyToMany
-	@JoinTable(name = "user_connections", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "connection_id"))
+	@JoinTable(name = "user_connections",
+		joinColumns = @JoinColumn(name = "user_id"), 
+		inverseJoinColumns = @JoinColumn(name = "connection_id"))
 	@ToString.Exclude
 	private List<User> connections;
 }

@@ -52,7 +52,7 @@ public class UserService {
 	 */
 
 	public User getCurrentUser(){
-		logger.info("Entrée dans la méthode UserService.getcurrentUser().");
+		logger.debug("Entrée dans la méthode UserService.getcurrentUser().");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		logger.debug("L'authentification : {} ", authentication);
 		Object principal = authentication.getPrincipal();
@@ -98,7 +98,7 @@ public class UserService {
 	 */
 
 	public User getUserWithUserDetails() {
-		logger.info("Entrée dans la méthode userService.getUserWithUserDetails.");
+		logger.debug("Entrée dans la méthode userService.getUserWithUserDetails.");
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 			if (principal instanceof UserDetails) {
@@ -106,7 +106,7 @@ public class UserService {
 				logger.debug("L'email : {} ", email);
 				return userRepository.findByEmail(email);
 			} else {
-				logger.warn("Le principal n'est pas une instance de UserDetails : {}", principal);
+				logger.error("Le principal n'est pas une instance de UserDetails : {}", principal);
 		        throw new UserNotFoundException("Le principal ne correspond pas à un utilisateur valide.");			
 	        }
 	}
