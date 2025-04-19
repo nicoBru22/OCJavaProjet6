@@ -1,8 +1,8 @@
 package com.projet6.payMyBuddy.controller;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -47,7 +47,8 @@ public class TransactionControllerTest {
 		mockMvc.perform(post("/add_transaction")
 				.param("email", emailTest)
 				.param("description", descriptionTest)
-		        .param("amount", String.valueOf(amountTest)))
+		        .param("amount", String.valueOf(amountTest))
+				.with(csrf()))
 			.andExpect(status().is3xxRedirection())
 			.andExpect(redirectedUrl("/transfer"));
 	}

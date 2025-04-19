@@ -31,7 +31,8 @@ public class UserExceptionTest {
     @WithMockUser(username = "testUser", roles = "ADMIN")
     void addConnexion_EmailEmpty_InvalidRequestException() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/users/add_connection")
-                .param("email", ""))
+                .param("email", "")
+                .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/add_relation"))
                 .andExpect(flash().attribute("error", containsString("L'adresse email est invalide.")));
@@ -45,7 +46,8 @@ public class UserExceptionTest {
     	when(userRepository.findByEmail(emailTest)).thenReturn(null);
     	
     	mockMvc.perform(MockMvcRequestBuilders.post("/users/add_connection")
-                .param("email", emailTest))
+                .param("email", emailTest)
+                .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/add_relation"))
                 .andExpect(flash().attribute("error", containsString("L'utilisateur à cette adresse mail n'existe pas.")));
@@ -63,7 +65,8 @@ public class UserExceptionTest {
     	mockMvc.perform(MockMvcRequestBuilders.post("/users/add_user")
                 .param("email", emailTest)
                 .param("username", usernameTest)
-                .param("password", passwordTest))
+                .param("password", passwordTest)
+                .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/signin"));
     }

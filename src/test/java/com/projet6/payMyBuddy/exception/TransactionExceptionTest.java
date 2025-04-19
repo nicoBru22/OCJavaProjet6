@@ -1,6 +1,7 @@
 package com.projet6.payMyBuddy.exception;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -36,7 +37,8 @@ public class TransactionExceptionTest {
 		mockMvc.perform(MockMvcRequestBuilders.post("/add_transaction")
 				.param("email", emailTest)
 				.param("description", descriptionTest)
-				.param("amount", amountTest))
+				.param("amount", amountTest)
+				.with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/transfer"));
 	}
@@ -51,7 +53,8 @@ public class TransactionExceptionTest {
 		mockMvc.perform(MockMvcRequestBuilders.post("/add_transaction")
 				.param("email", emailTest)
 				.param("description", descriptionTest)
-				.param("amount", amountTest))
+				.param("amount", amountTest)
+				.with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/transfer"));
 	}
@@ -66,7 +69,8 @@ public class TransactionExceptionTest {
 		mockMvc.perform(MockMvcRequestBuilders.post("/add_transaction")
 				.param("email", emailTest)
 				.param("description", descriptionTest)
-				.param("amount", amountTest))
+				.param("amount", amountTest)
+				.with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/transfer"));
 	}
@@ -87,7 +91,8 @@ public class TransactionExceptionTest {
 		mockMvc.perform(MockMvcRequestBuilders.post("/add_transaction")
 				.param("email", emailTest)
 				.param("description", descriptionTest)
-				.param("amount", amountTest))
+				.param("amount", amountTest)
+				.with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/transfer"));
 	}

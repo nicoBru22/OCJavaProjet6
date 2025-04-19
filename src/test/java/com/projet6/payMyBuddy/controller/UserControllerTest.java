@@ -6,6 +6,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -93,7 +94,8 @@ public class UserControllerTest {
 		mockMvc.perform(post("/users/add_user")
 		        .param("username", usernameTest)
 		        .param("email", emailTest)
-		        .param("password", passwordTest))
+		        .param("password", passwordTest)
+		        .with(csrf()))
 			.andExpect(status().isFound())
 			.andExpect(header().string("Location", "/login"));
 		
@@ -109,7 +111,8 @@ public class UserControllerTest {
         doNothing().when(userService).addConnection(emailTestValid);
 
         mockMvc.perform(post("/users/add_connection")
-                .param("email", emailTestValid))
+                .param("email", emailTestValid)
+                .with(csrf()))
                 .andExpect(status().isFound())
                 .andExpect(header().string("Location", "/profil"));
         
