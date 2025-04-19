@@ -2,6 +2,8 @@ package com.projet6.payMyBuddy.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
@@ -56,7 +58,8 @@ import java.util.List;
  */
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "users")
 public class User {
 
@@ -70,7 +73,7 @@ public class User {
 	@Column(unique = true, nullable = false)
 	private String email;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String password;
 	
 	@Column(nullable = false, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")

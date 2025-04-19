@@ -1,5 +1,6 @@
 package com.projet6.payMyBuddy.exception;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
@@ -80,6 +81,7 @@ public class UserExceptionTest {
     	when(userRepository.findByEmail(emailTest)).thenReturn(userTest);
     	
     	mockMvc.perform(MockMvcRequestBuilders.post("/users/add_user")
+    			.with(csrf())
                 .param("email", emailTest)
                 .param("username", usernameTest)
                 .param("password", passwordTest))

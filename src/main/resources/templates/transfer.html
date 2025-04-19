@@ -20,26 +20,15 @@
 	<body>
 		<div th:replace="~{fragments/menu :: menu}"></div>
 	
-	
 		<div id="containerTransfer">
 			<div class="divSolde">
 				<div id="solde">Solde :</div>
-				<div
-					id="numberSolde"
-					th:text="${solde}"
-				></div>
+				<div id="numberSolde" th:text="${solde}"></div>
 				<div> €</div>
 			</div>
-			<form
-				th:action="@{/add_transaction}"
-				method="post"
-				id="formTransaction"
-			>
-				<select
-					id="selectRelation"
-					th:name="email"
-					class="elementForm"
-				>
+			
+			<form th:action="@{/add_transaction}" 	method="post" id="formTransaction">
+				<select id="selectRelation" th:name="email" class="elementForm">
 					<option
 						value="optionDefault"
 						class="optionSelectRelation"
@@ -70,24 +59,13 @@
 					name="buttonPay"
 				>Payer</button>
 			</form>
-			<div
-				id="divError"
-				th:if="${error}"
-			>
-				<p
-					style="color: red;"
-					th:text="${error}"
-				></p>
+			
+			<div id="divError" th:if="${error}">
+				<p style="color: red;" th:text="${error}"></p>
 			</div>
 	
-			<div
-				id="divInfo"
-				th:if="${info}"
-			>
-				<p
-					style="color: green;"
-					th:text="${info}"
-				></p>
+			<div id="divInfo" th:if="${info}">
+				<p style="color: green;"th:text="${info}"></p>
 			</div>
 	
 	
@@ -126,8 +104,10 @@
 						>
 							<div
 								class="elementTable"
-								th:text="${transaction.receiver.username}"
-							>relationTest</div>
+								th:text="${transaction.sender.id == userId} ? ${transaction.receiver.username} : ${transaction.sender.username}"
+							>
+								relationTest
+							</div>
 							<div
 								class="elementTable"
 								th:text="${transaction.description}"

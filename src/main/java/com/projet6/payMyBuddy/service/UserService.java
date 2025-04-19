@@ -59,6 +59,7 @@ public class UserService {
 		logger.debug("L'object principal : {} ", principal);
 
 		if (principal instanceof OAuth2User) {
+			logger.debug("Utilisateur authentifié via un tiers Oauth2.");
 			User oAuthUser = getUserWithOauth((OAuth2User) principal);
 			return oAuthUser;
 
@@ -138,14 +139,16 @@ public class UserService {
 
 		User oAuthUser = userRepository.findByEmail(email);
 
-	/*	if (oAuthUser == null) {
+		if (oAuthUser == null) {
 			logger.debug("Utilisateur non trouvé, création d'un nouvel utilisateur.");
 
-			String password = "test";
-			User newUser = addUser(username, email, password);
+			User newUser = new User();
+			newUser.setEmail(email);
+			newUser.setUsername(username);
+			userRepository.save(newUser);
 
 			return newUser;
-		}*/
+		}
 		
 		logger.debug("Utilisateur trouvé : {}", oAuthUser.getUsername());
 		return oAuthUser;

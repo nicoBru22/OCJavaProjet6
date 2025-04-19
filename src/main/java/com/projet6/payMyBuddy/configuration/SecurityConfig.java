@@ -57,7 +57,7 @@ public class SecurityConfig {
 	 */
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable())
+		http
 				.headers(headers -> headers.addHeaderWriter((HeaderWriter) (request, response) -> response
 						.setHeader("Content-Security-Policy", "frame-ancestors 'self'")))
 				.authorizeHttpRequests(auth -> auth
@@ -72,7 +72,7 @@ public class SecurityConfig {
 						.anyRequest().authenticated())
 				.formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/profil", true).permitAll())
 				.oauth2Login(oauth -> oauth.loginPage("/login").defaultSuccessUrl("/profil", true))
-				.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll())
+				.logout(logout -> logout.logoutSuccessUrl("/login?logout").permitAll())
 				.userDetailsService(customUserDetailsService);
 		return http.build();
 	}

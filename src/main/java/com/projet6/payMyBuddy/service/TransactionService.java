@@ -93,7 +93,7 @@ public class TransactionService {
         sender.setSolde(senderNewSolde);
         receiver.setSolde(receiverNewSolde);
 
-        logger.debug("Nouveaux soldes : envoyeur = {}, destinataire = {}", senderNewSolde, receiverNewSolde);
+        logger.debug("Nouveaux soldes : sender = {}, receiver = {}", senderNewSolde, receiverNewSolde);
 
         Transactions newTransaction = new Transactions();
         newTransaction.setSender(sender);
