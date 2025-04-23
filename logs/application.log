@@ -1,0 +1,820 @@
+2025-04-23T19:15:14.102+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:15:14.109+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:15:14.196+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-23T19:15:14.197+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-23T19:15:14.198+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-23T19:15:14.205+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-23T19:15:14.205+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 215 ms
+2025-04-23T19:15:14.232+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2025-04-23T19:15:14.257+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@50236908
+2025-04-23T19:15:14.257+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2025-04-23T19:15:14.269+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:15:14.272+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:15:14.278+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:15:14.284+02:00  WARN 12790 --- [payMyBuddy] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:15:14.286+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-4)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:15:14.330+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:15:14.497+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:15:14.565+02:00  WARN 12790 --- [payMyBuddy] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:15:14.584+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:15:14.714+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:postgresql://localhost:5432/pay_my_buddy'
+2025-04-23T19:15:14.736+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-23T19:15:14.747+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-23T19:15:14.754+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-04-23T19:15:18.298+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-23T19:15:18.298+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-23T19:15:18.299+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-23T19:15:25.911+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:15:25.995+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:15:26.035+02:00 ERROR 12790 --- [payMyBuddy] [http-nio-8080-exec-1] c.p.p.exception.GlobalHandlerException   : Une erreur interne est survenue : No static resource favicon.ico.
+2025-04-23T19:15:26.036+02:00  WARN 12790 --- [payMyBuddy] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.]
+2025-04-23T19:16:23.387+02:00  INFO 12790 --- [payMyBuddy] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-04-23T19:16:23.390+02:00  INFO 12790 --- [payMyBuddy] [Thread-15] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-23T19:16:23.392+02:00  INFO 12790 --- [payMyBuddy] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-23T19:16:23.397+02:00  INFO 12790 --- [payMyBuddy] [Thread-15] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:16:23.399+02:00  INFO 12790 --- [payMyBuddy] [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2025-04-23T19:16:23.413+02:00  INFO 12790 --- [payMyBuddy] [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2025-04-23T19:16:23.582+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:16:23.589+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:16:23.661+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-23T19:16:23.662+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-23T19:16:23.662+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-23T19:16:23.668+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-23T19:16:23.668+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 181 ms
+2025-04-23T19:16:23.689+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2025-04-23T19:16:23.714+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@12b597d2
+2025-04-23T19:16:23.714+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2025-04-23T19:16:23.724+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:16:23.726+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:16:23.732+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:16:23.738+02:00  WARN 12790 --- [payMyBuddy] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:16:23.739+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-5)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:16:23.781+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:16:23.947+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:16:24.000+02:00  WARN 12790 --- [payMyBuddy] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:16:24.021+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:16:24.108+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:postgresql://localhost:5432/pay_my_buddy'
+2025-04-23T19:16:24.126+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-23T19:16:24.136+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-23T19:16:24.141+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-04-23T19:16:27.704+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-23T19:16:27.705+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-23T19:16:27.707+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-04-23T19:16:40.239+02:00 ERROR 12790 --- [payMyBuddy] [http-nio-8080-exec-1] c.p.p.exception.GlobalHandlerException   : Une erreur interne est survenue : No static resource favicon.ico.
+2025-04-23T19:16:40.241+02:00  WARN 12790 --- [payMyBuddy] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.]
+2025-04-23T19:16:59.649+02:00  INFO 12790 --- [payMyBuddy] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-04-23T19:16:59.653+02:00  INFO 12790 --- [payMyBuddy] [Thread-19] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-23T19:16:59.655+02:00  INFO 12790 --- [payMyBuddy] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-23T19:16:59.662+02:00  INFO 12790 --- [payMyBuddy] [Thread-19] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:16:59.663+02:00  INFO 12790 --- [payMyBuddy] [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2025-04-23T19:16:59.677+02:00  INFO 12790 --- [payMyBuddy] [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2025-04-23T19:16:59.855+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:16:59.861+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:16:59.936+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-23T19:16:59.937+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-23T19:16:59.937+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-23T19:16:59.943+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-23T19:16:59.943+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 186 ms
+2025-04-23T19:16:59.964+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2025-04-23T19:16:59.987+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@4fefcffe
+2025-04-23T19:16:59.987+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2025-04-23T19:16:59.994+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:16:59.996+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:17:00.002+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:17:00.007+02:00  WARN 12790 --- [payMyBuddy] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:17:00.008+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-6)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:17:00.008+02:00 DEBUG 12790 --- [payMyBuddy] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2003, org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@766d094a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@298fc78a)
+2025-04-23T19:17:00.008+02:00 DEBUG 12790 --- [payMyBuddy] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2e6f9c39) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@61003d5a)
+2025-04-23T19:17:00.044+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:17:00.202+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:17:00.254+02:00  WARN 12790 --- [payMyBuddy] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:17:00.272+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:17:00.359+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:postgresql://localhost:5432/pay_my_buddy'
+2025-04-23T19:17:00.380+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-23T19:17:00.391+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-23T19:17:00.396+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-04-23T19:19:22.182+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-23T19:19:22.182+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-23T19:19:22.184+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-23T19:19:24.604+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:19:24.606+02:00 ERROR 12790 --- [payMyBuddy] [http-nio-8080-exec-7] c.p.p.c.CustomUserDetailService          : Utilisateur non trouvé pour l'email : nico
+2025-04-23T19:19:24.762+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:19:24.763+02:00 ERROR 12790 --- [payMyBuddy] [http-nio-8080-exec-7] c.p.p.c.CustomUserDetailService          : Utilisateur non trouvé pour l'email : nico
+2025-04-23T19:19:32.661+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:19:32.753+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:23:57.515+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:23:57.519+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:23:57.522+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:23:57.533+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        t1_0.id,
+        t1_0.amount,
+        t1_0.bank_commission,
+        t1_0.description,
+        t1_0.receiver_id,
+        t1_0.sender_id,
+        t1_0.total_amount 
+    from
+        transactions t1_0 
+    where
+        t1_0.sender_id=?
+2025-04-23T19:23:57.539+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-04-23T19:23:57.541+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-04-23T19:23:57.544+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        t1_0.id,
+        t1_0.amount,
+        t1_0.bank_commission,
+        t1_0.description,
+        t1_0.receiver_id,
+        t1_0.sender_id,
+        t1_0.total_amount 
+    from
+        transactions t1_0 
+    where
+        t1_0.receiver_id=?
+2025-04-23T19:23:57.552+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        c1_0.user_id,
+        c1_1.id,
+        c1_1.email,
+        c1_1.password,
+        c1_1.role,
+        c1_1.solde,
+        c1_1.username 
+    from
+        user_connections c1_0 
+    join
+        users c1_1 
+            on c1_1.id=c1_0.connection_id 
+    where
+        c1_0.user_id=?
+2025-04-23T19:23:57.591+02:00 ERROR 12790 --- [payMyBuddy] [http-nio-8080-exec-3] c.p.p.exception.GlobalHandlerException   : Une erreur interne est survenue : No static resource favicon.ico.
+2025-04-23T19:23:57.592+02:00  WARN 12790 --- [payMyBuddy] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.]
+2025-04-23T19:24:06.561+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:24:06.566+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:24:06.569+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    insert 
+    into
+        transactions
+        (amount, bank_commission, description, receiver_id, sender_id, total_amount) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-04-23T19:24:06.580+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    update
+        users 
+    set
+        email=?,
+        password=?,
+        role=?,
+        solde=?,
+        username=? 
+    where
+        id=?
+2025-04-23T19:24:06.585+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    update
+        users 
+    set
+        email=?,
+        password=?,
+        role=?,
+        solde=?,
+        username=? 
+    where
+        id=?
+2025-04-23T19:24:06.594+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:24:06.597+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:24:06.599+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:24:06.602+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        t1_0.id,
+        t1_0.amount,
+        t1_0.bank_commission,
+        t1_0.description,
+        t1_0.receiver_id,
+        t1_0.sender_id,
+        t1_0.total_amount 
+    from
+        transactions t1_0 
+    where
+        t1_0.sender_id=?
+2025-04-23T19:24:06.603+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-04-23T19:24:06.604+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-04-23T19:24:06.606+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        t1_0.id,
+        t1_0.amount,
+        t1_0.bank_commission,
+        t1_0.description,
+        t1_0.receiver_id,
+        t1_0.sender_id,
+        t1_0.total_amount 
+    from
+        transactions t1_0 
+    where
+        t1_0.receiver_id=?
+2025-04-23T19:24:06.608+02:00 DEBUG 12790 --- [payMyBuddy] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        c1_0.user_id,
+        c1_1.id,
+        c1_1.email,
+        c1_1.password,
+        c1_1.role,
+        c1_1.solde,
+        c1_1.username 
+    from
+        user_connections c1_0 
+    join
+        users c1_1 
+            on c1_1.id=c1_0.connection_id 
+    where
+        c1_0.user_id=?
+2025-04-23T19:24:06.636+02:00 ERROR 12790 --- [payMyBuddy] [http-nio-8080-exec-9] c.p.p.exception.GlobalHandlerException   : Une erreur interne est survenue : No static resource favicon.ico.
+2025-04-23T19:24:06.636+02:00  WARN 12790 --- [payMyBuddy] [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.]
+2025-04-23T19:25:09.533+02:00  INFO 12790 --- [payMyBuddy] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-04-23T19:25:09.535+02:00  INFO 12790 --- [payMyBuddy] [Thread-23] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-23T19:25:09.537+02:00  INFO 12790 --- [payMyBuddy] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-23T19:25:09.541+02:00  INFO 12790 --- [payMyBuddy] [Thread-23] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:25:09.542+02:00  INFO 12790 --- [payMyBuddy] [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2025-04-23T19:25:09.555+02:00  INFO 12790 --- [payMyBuddy] [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2025-04-23T19:25:09.715+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:25:09.720+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:25:09.797+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-23T19:25:09.798+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-23T19:25:09.798+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-23T19:25:09.805+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-23T19:25:09.805+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 183 ms
+2025-04-23T19:25:09.826+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2025-04-23T19:25:09.851+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@1aa07956
+2025-04-23T19:25:09.851+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2025-04-23T19:25:09.858+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:25:09.860+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:25:09.864+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:25:09.870+02:00  WARN 12790 --- [payMyBuddy] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:25:09.871+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-7)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:25:09.902+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:25:10.076+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:25:10.134+02:00  WARN 12790 --- [payMyBuddy] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:25:10.151+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:25:10.257+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:postgresql://localhost:5432/pay_my_buddy'
+2025-04-23T19:25:10.277+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-23T19:25:10.288+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-23T19:25:10.294+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-04-23T19:25:21.456+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-23T19:25:21.456+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-23T19:25:21.459+02:00  INFO 12790 --- [payMyBuddy] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2025-04-23T19:25:21.550+02:00 ERROR 12790 --- [payMyBuddy] [http-nio-8080-exec-5] c.p.p.exception.GlobalHandlerException   : Une erreur interne est survenue : No static resource favicon.ico.
+2025-04-23T19:25:21.551+02:00  WARN 12790 --- [payMyBuddy] [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.]
+2025-04-23T19:27:06.091+02:00  INFO 12790 --- [payMyBuddy] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-04-23T19:27:06.092+02:00  INFO 12790 --- [payMyBuddy] [Thread-27] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-23T19:27:06.092+02:00  INFO 12790 --- [payMyBuddy] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-23T19:27:06.094+02:00  INFO 12790 --- [payMyBuddy] [Thread-27] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:27:06.095+02:00  INFO 12790 --- [payMyBuddy] [Thread-27] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown initiated...
+2025-04-23T19:27:06.100+02:00  INFO 12790 --- [payMyBuddy] [Thread-27] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown completed.
+2025-04-23T19:27:06.245+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:27:06.250+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:27:06.310+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-23T19:27:06.310+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-23T19:27:06.310+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-23T19:27:06.316+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-23T19:27:06.316+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 156 ms
+2025-04-23T19:27:06.335+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Starting...
+2025-04-23T19:27:06.357+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-8 - Added connection org.postgresql.jdbc.PgConnection@28e11b47
+2025-04-23T19:27:06.357+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Start completed.
+2025-04-23T19:27:06.363+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:27:06.365+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:27:06.369+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:27:06.374+02:00  WARN 12790 --- [payMyBuddy] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:27:06.375+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-8)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:27:06.375+02:00 DEBUG 12790 --- [payMyBuddy] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2003, org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@3a07b01f) replaced previous registration(org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@f7d54f5)
+2025-04-23T19:27:06.375+02:00 DEBUG 12790 --- [payMyBuddy] [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@769b3e5a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@6e550c7f)
+2025-04-23T19:27:06.408+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:27:06.553+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:27:06.597+02:00  WARN 12790 --- [payMyBuddy] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:27:06.610+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:27:06.684+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:postgresql://localhost:5432/pay_my_buddy'
+2025-04-23T19:27:06.702+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-23T19:27:06.710+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-23T19:27:06.715+02:00  INFO 12790 --- [payMyBuddy] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-04-23T19:32:03.850+02:00  INFO 12790 --- [payMyBuddy] [RMI TCP Connection(36)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2025-04-23T19:32:03.850+02:00  INFO 12790 --- [payMyBuddy] [RMI TCP Connection(36)-127.0.0.1] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-23T19:32:03.851+02:00  INFO 12790 --- [payMyBuddy] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-23T19:32:03.853+02:00  INFO 12790 --- [payMyBuddy] [RMI TCP Connection(36)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:03.854+02:00  INFO 12790 --- [payMyBuddy] [RMI TCP Connection(36)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown initiated...
+2025-04-23T19:32:03.862+02:00  INFO 12790 --- [payMyBuddy] [RMI TCP Connection(36)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown completed.
+2025-04-23T19:32:15.056+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:32:15.152+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:32:15.733+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-23T19:32:16.158+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@33903444
+2025-04-23T19:32:16.161+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-23T19:32:16.326+02:00  INFO 15259 --- [payMyBuddy] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:32:16.406+02:00  INFO 15259 --- [payMyBuddy] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-23T19:32:16.487+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:32:16.981+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:32:17.066+02:00  WARN 15259 --- [payMyBuddy] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:32:17.092+02:00  INFO 15259 --- [payMyBuddy] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:32:17.102+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2003, org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@4bc2cb11) replaced previous registration(org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@452d9887)
+2025-04-23T19:32:17.102+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5aa16232) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1b7708d9)
+2025-04-23T19:32:18.289+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:32:18.516+02:00  INFO 15259 --- [payMyBuddy] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:18.941+02:00  WARN 15259 --- [payMyBuddy] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:32:19.084+02:00  INFO 15259 --- [payMyBuddy] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:32:20.486+02:00  INFO 15259 --- [payMyBuddy] [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.projet6.payMyBuddy.exception.UserExceptionTest]: UserExceptionTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-23T19:32:20.511+02:00  INFO 15259 --- [payMyBuddy] [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.projet6.payMyBuddy.PayMyBuddyApplication for test class com.projet6.payMyBuddy.exception.UserExceptionTest
+2025-04-23T19:32:20.515+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-04-23T19:32:20.700+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:32:20.710+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:32:20.797+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2025-04-23T19:32:20.821+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@230dd59
+2025-04-23T19:32:20.822+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2025-04-23T19:32:20.840+02:00  INFO 15259 --- [payMyBuddy] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:32:20.843+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:32:20.859+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:32:20.867+02:00  WARN 15259 --- [payMyBuddy] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:32:20.870+02:00  INFO 15259 --- [payMyBuddy] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:32:20.871+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2003, org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@3aafd0e4) replaced previous registration(org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@6d6549c)
+2025-04-23T19:32:20.872+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@77d7c5e2) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@4eae8578)
+2025-04-23T19:32:20.953+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:32:21.146+02:00  INFO 15259 --- [payMyBuddy] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:21.196+02:00  WARN 15259 --- [payMyBuddy] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:32:21.222+02:00  INFO 15259 --- [payMyBuddy] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:32:21.415+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-23T19:32:21.416+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-23T19:32:21.417+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-04-23T19:32:22.474+02:00 DEBUG 15259 --- [payMyBuddy] [main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:32:22.602+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.controller.UserController          : Requête non valide, redirection vers la page signin.
+2025-04-23T19:32:22.677+02:00 DEBUG 15259 --- [payMyBuddy] [main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:32:22.694+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.payMyBuddy.service.UserService       : Utilisateur non trouvé dans la base de données : null 
+2025-04-23T19:32:22.695+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.controller.UserController          : UserNotFoundException attrapée : L'utilisateur n'existe pas en base de donnée : null
+2025-04-23T19:32:22.732+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.payMyBuddy.service.UserService       : Email invalide reçu : 
+2025-04-23T19:32:22.733+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.controller.UserController          : InvalidRequestException attrapée : L'email est vide ou nul : 
+2025-04-23T19:32:22.751+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.payMyBuddy.service.UserService       : Tous les champs sont requis. Username : , Email : email@test.fr, Password : passwordTest
+2025-04-23T19:32:22.751+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.controller.UserController          : Requête non valide, redirection vers la page signin.
+2025-04-23T19:32:22.772+02:00  INFO 15259 --- [payMyBuddy] [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.projet6.payMyBuddy.exception.TransactionExceptionTest]: TransactionExceptionTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-23T19:32:22.778+02:00  INFO 15259 --- [payMyBuddy] [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.projet6.payMyBuddy.PayMyBuddyApplication for test class com.projet6.payMyBuddy.exception.TransactionExceptionTest
+2025-04-23T19:32:22.784+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-04-23T19:32:23.109+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:32:23.128+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:32:23.416+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2025-04-23T19:32:23.488+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@44ef42f4
+2025-04-23T19:32:23.489+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2025-04-23T19:32:23.530+02:00  INFO 15259 --- [payMyBuddy] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:32:23.538+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:32:23.560+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:32:23.569+02:00  WARN 15259 --- [payMyBuddy] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:32:23.573+02:00  INFO 15259 --- [payMyBuddy] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-3)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:32:23.574+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2003, org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@67051f0) replaced previous registration(org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@6550cebb)
+2025-04-23T19:32:23.575+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@680d69ae) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@32684468)
+2025-04-23T19:32:23.743+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:32:23.959+02:00  INFO 15259 --- [payMyBuddy] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:24.113+02:00  WARN 15259 --- [payMyBuddy] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:32:24.182+02:00  INFO 15259 --- [payMyBuddy] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:32:24.538+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-23T19:32:24.539+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-23T19:32:24.543+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2025-04-23T19:32:24.601+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.service.TransactionService         : L'email du destinataire est obligatoire. Email = .
+2025-04-23T19:32:24.605+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.controller.TransactionController   : Erreur lors de l'ajout de la transaction : L'email du destinataire est obligatoire. Email : 
+2025-04-23T19:32:24.628+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.service.TransactionService         : Le montant est obligatoire et doit être supérieur à 0. Montant = 0.0.
+2025-04-23T19:32:24.630+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.controller.TransactionController   : Erreur lors de l'ajout de la transaction : Le montant est obligatoire et doit être supérieur à 0. Montant : 0.0
+2025-04-23T19:32:24.672+02:00 DEBUG 15259 --- [payMyBuddy] [main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:32:24.678+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.service.TransactionService         : Solde insuffisant. Solde actuel = 10.0, Montant à débiter = 105.0
+2025-04-23T19:32:24.684+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.controller.TransactionController   : Erreur lors de l'ajout de la transaction : Solde insuffisant. Solde actuel = 10.0, Montant à débiter = 105.0
+2025-04-23T19:32:24.709+02:00 DEBUG 15259 --- [payMyBuddy] [main] org.hibernate.SQL                        : 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.solde,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2025-04-23T19:32:24.711+02:00 ERROR 15259 --- [payMyBuddy] [main] c.p.p.controller.TransactionController   : Erreur lors de l'ajout de la transaction : Cannot invoke "com.projet6.payMyBuddy.model.User.getSolde()" because "sender" is null
+2025-04-23T19:32:24.729+02:00  INFO 15259 --- [payMyBuddy] [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.projet6.payMyBuddy.controller.TransactionControllerTest]: TransactionControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-23T19:32:24.756+02:00  INFO 15259 --- [payMyBuddy] [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.projet6.payMyBuddy.PayMyBuddyApplication for test class com.projet6.payMyBuddy.controller.TransactionControllerTest
+2025-04-23T19:32:24.763+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-04-23T19:32:25.102+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:32:25.116+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:32:25.362+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2025-04-23T19:32:25.402+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@e53cb40
+2025-04-23T19:32:25.403+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2025-04-23T19:32:25.424+02:00  INFO 15259 --- [payMyBuddy] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:32:25.433+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:32:25.451+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:32:25.459+02:00  WARN 15259 --- [payMyBuddy] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:32:25.461+02:00  INFO 15259 --- [payMyBuddy] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-4)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:32:25.462+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2003, org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@ca55352) replaced previous registration(org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@6f5868c4)
+2025-04-23T19:32:25.463+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@50632668) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7f3546ae)
+2025-04-23T19:32:25.576+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:32:25.769+02:00  INFO 15259 --- [payMyBuddy] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:25.844+02:00  WARN 15259 --- [payMyBuddy] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:32:25.893+02:00  INFO 15259 --- [payMyBuddy] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:32:26.190+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-23T19:32:26.190+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-23T19:32:26.193+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2025-04-23T19:32:26.238+02:00  INFO 15259 --- [payMyBuddy] [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.projet6.payMyBuddy.controller.UserControllerTest]: UserControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-23T19:32:26.242+02:00  INFO 15259 --- [payMyBuddy] [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.projet6.payMyBuddy.PayMyBuddyApplication for test class com.projet6.payMyBuddy.controller.UserControllerTest
+2025-04-23T19:32:26.603+02:00  INFO 15259 --- [payMyBuddy] [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.projet6.payMyBuddy.controller.NavigationControllerTest]: NavigationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-23T19:32:26.609+02:00  INFO 15259 --- [payMyBuddy] [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.projet6.payMyBuddy.PayMyBuddyApplication for test class com.projet6.payMyBuddy.controller.NavigationControllerTest
+2025-04-23T19:32:26.617+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-04-23T19:32:26.885+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:32:26.899+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:32:27.069+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2025-04-23T19:32:27.101+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@43e9ad7e
+2025-04-23T19:32:27.101+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2025-04-23T19:32:27.124+02:00  INFO 15259 --- [payMyBuddy] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:32:27.131+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:32:27.148+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:32:27.155+02:00  WARN 15259 --- [payMyBuddy] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:32:27.156+02:00  INFO 15259 --- [payMyBuddy] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-5)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:32:27.158+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2003, org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@776a5594) replaced previous registration(org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@7abbff6b)
+2025-04-23T19:32:27.158+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@49dfddcf) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@407408a6)
+2025-04-23T19:32:27.270+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:32:27.452+02:00  INFO 15259 --- [payMyBuddy] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:27.530+02:00  WARN 15259 --- [payMyBuddy] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:32:27.572+02:00  INFO 15259 --- [payMyBuddy] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:32:27.830+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-23T19:32:27.831+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-23T19:32:27.833+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2025-04-23T19:32:28.633+02:00  INFO 15259 --- [payMyBuddy] [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.projet6.payMyBuddy.service.UserServiceTest]: UserServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-23T19:32:28.645+02:00  INFO 15259 --- [payMyBuddy] [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.projet6.payMyBuddy.PayMyBuddyApplication for test class com.projet6.payMyBuddy.service.UserServiceTest
+2025-04-23T19:32:28.651+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-04-23T19:32:28.870+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:32:28.882+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:32:29.222+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2025-04-23T19:32:29.250+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@439c17ac
+2025-04-23T19:32:29.250+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2025-04-23T19:32:29.264+02:00  INFO 15259 --- [payMyBuddy] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:32:29.266+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:32:29.279+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:32:29.288+02:00  WARN 15259 --- [payMyBuddy] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:32:29.290+02:00  INFO 15259 --- [payMyBuddy] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-6)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:32:29.291+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2003, org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@3ee2466e) replaced previous registration(org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@1d19c93e)
+2025-04-23T19:32:29.291+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2df9ae6a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@122fe18)
+2025-04-23T19:32:29.378+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:32:29.581+02:00  INFO 15259 --- [payMyBuddy] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:29.632+02:00  WARN 15259 --- [payMyBuddy] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:32:29.661+02:00  INFO 15259 --- [payMyBuddy] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:32:29.846+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-23T19:32:29.847+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-23T19:32:29.848+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-04-23T19:32:30.193+02:00  INFO 15259 --- [payMyBuddy] [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.projet6.payMyBuddy.service.TransactionServiceTest]: TransactionServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-04-23T19:32:30.198+02:00  INFO 15259 --- [payMyBuddy] [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.projet6.payMyBuddy.PayMyBuddyApplication for test class com.projet6.payMyBuddy.service.TransactionServiceTest
+2025-04-23T19:32:30.204+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-04-23T19:32:30.391+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-23T19:32:30.401+02:00  INFO 15259 --- [payMyBuddy] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 2 JPA repository interfaces.
+2025-04-23T19:32:30.611+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2025-04-23T19:32:30.631+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@86a7880
+2025-04-23T19:32:30.632+02:00  INFO 15259 --- [payMyBuddy] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2025-04-23T19:32:30.646+02:00  INFO 15259 --- [payMyBuddy] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-23T19:32:30.648+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-23T19:32:30.657+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-23T19:32:30.662+02:00  WARN 15259 --- [payMyBuddy] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-23T19:32:30.664+02:00  INFO 15259 --- [payMyBuddy] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-7)']
+	Database driver: undefined/unknown
+	Database version: 14.17
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-23T19:32:30.665+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2003, org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@5406f576) replaced previous registration(org.hibernate.type.descriptor.sql.internal.ArrayDdlTypeImpl@5d1d3f23)
+2025-04-23T19:32:30.665+02:00 DEBUG 15259 --- [payMyBuddy] [main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1efa01be) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7cb96f45)
+2025-04-23T19:32:30.778+02:00  INFO 15259 --- [payMyBuddy] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-23T19:32:30.955+02:00  INFO 15259 --- [payMyBuddy] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:30.979+02:00  WARN 15259 --- [payMyBuddy] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-23T19:32:31.004+02:00  INFO 15259 --- [payMyBuddy] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-04-23T19:32:31.159+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-23T19:32:31.159+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-23T19:32:31.160+02:00  INFO 15259 --- [payMyBuddy] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-04-23T19:32:31.377+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:31.382+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-23T19:32:31.401+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-23T19:32:31.407+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:31.408+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2025-04-23T19:32:31.420+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2025-04-23T19:32:31.424+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:31.426+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2025-04-23T19:32:31.442+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2025-04-23T19:32:31.449+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:31.450+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2025-04-23T19:32:31.467+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2025-04-23T19:32:31.471+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:31.473+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2025-04-23T19:32:31.490+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2025-04-23T19:32:31.494+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:31.496+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2025-04-23T19:32:31.523+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2025-04-23T19:32:31.527+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-23T19:32:31.528+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown initiated...
+2025-04-23T19:32:31.551+02:00  INFO 15259 --- [payMyBuddy] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown completed.
