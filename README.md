@@ -4,11 +4,11 @@ MODÈLE PHYSIQUE DE DONNÉE :
 
 -- Création de la base de données si elle n'existe pas déjà :
 
-CREATE DATABASE OCProjet6_PayMyBuddy;
+CREATE DATABASE pay_my_buddy;
 
 -- Sélection de la base de données : 
 
-USE OCProjet6_PayMyBuddy;
+\c pay_my_buddy;
 
 -- Table des utilisateurs :
 
